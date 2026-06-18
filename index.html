@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="India Garden Pleasanton — Authentic North Indian cuisine. Dine-in, takeout, delivery, catering & reservations. Located at 210 Rose Ave, Pleasanton, CA.">
+<meta name="keywords" content="India Garden Pleasanton, Indian Restaurant Pleasanton, Indian Food Pleasanton, Best Indian Restaurant, Biryani, Tandoori, Curry, Catering Pleasanton">
+<meta property="og:title" content="India Garden Pleasanton | Authentic North Indian Cuisine">
+<meta property="og:description" content="Authentic North Indian cuisine in Pleasanton, CA. Order online, book a table, or inquire about catering.">
+<meta property="og:image" content="https://indiagardenpleasanton.com/wp-content/uploads/2025/01/banner.jpg">
+<meta property="og:url" content="https://indiagardenpleasanton.com/">
+<meta name="twitter:card" content="summary_large_image">
+<title>India Garden Pleasanton | Best Indian Restaurant in Pleasanton, CA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --saffron: #E8820C;
+  --saffron-hover: #C9700A;
+  --saffron-light: #FFF3E6;
+  --saffron-pale: #FFF9F2;
+  --turmeric: #F5C842;
+  --turmeric-light: #FFFBE8;
+  --rose: #D63A6B;
+  --rose-light: #FFF0F5;
+  --teal: #0D7E6B;
+  --teal-light: #E6F7F4;
+  --purple: #5E35B1;
+  --purple-light: #EDE7F6;
+  --ink: #1A1208;
+  --ink2: #2D2215;
+  --gray: #6B5E4E;
+  --lightgray: #F5F0EA;
+  --border: #EDE5D8;
+  --white: #FFFFFF;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: #fff;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; }
+
+/* ===================== NAVIGATION ===================== */
+.nav {
+  background: #fff;
+  border-bottom: 1.5px solid var(--border);
+  padding: 0 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  transition: box-shadow 0.3s;
+}
+.nav.scrolled { box-shadow: 0 4px 24px rgba(26,18,8,0.08); }
+.logo-wrap { display: flex; align-items: center; gap: 12px; }
+.logo-badge {
+  width: 44px; height: 44px;
+  background: var(--saffron);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+.logo-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); line-height: 1.1; }
+.logo-sub { font-size: 0.68rem; color: var(--gray); letter-spacing: 0.08em; font-weight: 400; }
+.nav-links { display: flex; gap: 0.2rem; align-items: center; }
+.nav-links a {
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem; color: var(--gray);
+  border-radius: 8px; font-weight: 500;
+  transition: all 0.2s;
+}
+.nav-links a:hover { background: var(--lightgray); color: var(--ink); }
+.nav-reserve {
+  border: 1.5px solid var(--saffron) !important;
+  color: var(--saffron) !important;
+  padding: 0.45rem 1.1rem !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+}
+.nav-reserve:hover { background: var(--saffron-light) !important; }
+.nav-order {
+  background: var(--saffron) !important;
+  color: #fff !important;
+  padding: 0.5rem 1.3rem !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+}
+.nav-order:hover { background: var(--saffron-hover) !important; }
+
+/* Mobile hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 6px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--ink); border-radius: 2px;
+  transition: all 0.3s;
+}
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  border-bottom: 1.5px solid var(--border);
+  padding: 1rem 2rem 1.5rem;
+  gap: 0.3rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  padding: 0.7rem 0.5rem;
+  font-size: 0.9rem; color: var(--gray);
+  font-weight: 500; border-radius: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--saffron); }
+
+/* ===================== BUTTONS ===================== */
+.btn-fill {
+  background: var(--saffron); color: #fff;
+  padding: 0.85rem 2rem; border-radius: 12px;
+  font-size: 0.88rem; font-weight: 600;
+  border: none; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.25s; display: inline-block;
+}
+.btn-fill:hover { background: var(--saffron-hover); transform: translateY(-1px); }
+.btn-stroke {
+  background: #fff; color: var(--saffron);
+  padding: 0.85rem 2rem; border-radius: 12px;
+  font-size: 0.88rem; font-weight: 600;
+  border: 2px solid var(--saffron); cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.25s; display: inline-block;
+}
+.btn-stroke:hover { background: var(--saffron-light); }
+
+/* ===================== HERO ===================== */
+.hero {
+  background: #fff;
+  padding: 4rem 4rem 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 90vh;
+}
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--saffron-light); border: 1.5px solid #F5C49A;
+  padding: 0.4rem 1rem; border-radius: 50px;
+  font-size: 0.75rem; font-weight: 600; color: var(--saffron);
+  margin-bottom: 1.5rem;
+}
+.hero-pill-dot { width: 7px; height: 7px; background: var(--saffron); border-radius: 50%; }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 4.5vw, 4.4rem);
+  line-height: 1.1; font-weight: 700; color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+.hero h1 em { font-style: italic; color: var(--saffron); }
+.hero-sub { font-size: 1rem; color: var(--gray); line-height: 1.8; max-width: 420px; margin-bottom: 2rem; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+.hstat-n { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--ink); line-height: 1; }
+.hstat-l { font-size: 0.72rem; color: var(--gray); margin-top: 3px; font-weight: 500; }
+
+.hero-right { position: relative; }
+.hero-img-stack {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 280px 180px;
+  gap: 12px;
+}
+.himg { border-radius: 16px; overflow: hidden; position: relative; }
+.himg img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.himg:hover img { transform: scale(1.04); }
+.himg.tall { grid-row: span 2; border-radius: 20px; }
+.himg-label {
+  position: absolute; bottom: 10px; left: 10px;
+  background: rgba(255,255,255,0.92);
+  padding: 5px 12px; border-radius: 50px;
+  font-size: 0.7rem; font-weight: 600; color: var(--ink);
+}
+.hero-badge {
+  position: absolute; top: -16px; right: -16px;
+  background: var(--turmeric);
+  width: 88px; height: 88px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 20px rgba(245,200,66,0.4);
+}
+.badge-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--ink2); line-height: 1; }
+.badge-txt { font-size: 0.58rem; font-weight: 600; color: var(--ink2); letter-spacing: 0.05em; text-align: center; }
+
+/* ===================== TICKER ===================== */
+.ticker { background: var(--ink); padding: 0.85rem 0; overflow: hidden; white-space: nowrap; }
+.ticker-track { display: inline-flex; animation: tick 28s linear infinite; }
+.tick-item {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0 2.2rem;
+  font-size: 0.73rem; font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.tick-sep { width: 5px; height: 5px; background: var(--saffron); border-radius: 50%; flex-shrink: 0; }
+@keyframes tick { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ===================== SECTION COMMONS ===================== */
+.sec { padding: 5.5rem 4rem; }
+.sec-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.sec-chip span { width: 22px; height: 2px; border-radius: 2px; display: inline-block; }
+.sec-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3vw, 2.9rem);
+  font-weight: 700; line-height: 1.15; color: var(--ink);
+  margin-bottom: 1rem;
+}
+.sec-h em { font-style: italic; }
+.sec-p { font-size: 0.95rem; color: var(--gray); line-height: 1.85; max-width: 520px; }
+
+/* ===================== ABOUT ===================== */
+.about { background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: relative; padding-bottom: 2rem; }
+.aimg { border-radius: 16px; overflow: hidden; }
+.aimg img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.5s; }
+.aimg:hover img { transform: scale(1.04); }
+.aimg.big { grid-row: span 2; }
+.aimg.big img { height: 420px; border-radius: 20px; }
+.about-pill {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  background: #fff; border: 2px solid var(--border);
+  padding: 0.7rem 1.4rem; border-radius: 50px;
+  white-space: nowrap; display: flex; align-items: center; gap: 10px;
+  font-size: 0.78rem; font-weight: 600; color: var(--ink);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.about-pill-star { color: var(--turmeric); font-size: 1rem; }
+.feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 2rem; }
+.feat {
+  background: var(--lightgray); border-radius: 12px;
+  padding: 0.9rem 1rem; display: flex; align-items: center;
+  gap: 10px; font-size: 0.82rem; font-weight: 500; color: var(--ink);
+  transition: background 0.2s;
+}
+.feat:hover { background: #EDE5D8; }
+.feat-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+
+/* ===================== MENU ===================== */
+.menu-sec { background: var(--lightgray); }
+.menu-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 2rem 0 1.5rem; }
+.mtab {
+  padding: 0.5rem 1.3rem; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 600; cursor: pointer;
+  border: 1.5px solid var(--border); background: #fff;
+  color: var(--gray); transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.mtab.on { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.mcard {
+  background: #fff; border-radius: 18px; overflow: hidden;
+  border: 1.5px solid var(--border);
+  transition: all 0.3s; cursor: pointer;
+}
+.mcard:hover {
+  transform: translateY(-5px);
+  border-color: var(--saffron);
+  box-shadow: 0 16px 48px rgba(232,130,12,0.12);
+}
+.mcard-img { width: 100%; height: 180px; object-fit: cover; transition: transform 0.5s; }
+.mcard:hover .mcard-img { transform: scale(1.04); }
+.mcard-body { padding: 1.1rem 1.2rem 1.3rem; }
+.mcard-tag {
+  display: inline-block; font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 50px; margin-bottom: 0.5rem;
+}
+.mcard-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.35rem; }
+.mcard-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.65; margin-bottom: 0.85rem; }
+.mcard-foot { display: flex; justify-content: space-between; align-items: center; }
+.mcard-price { font-size: 1.05rem; font-weight: 700; color: var(--saffron); }
+.mcard-btn {
+  background: var(--saffron-light); color: var(--saffron);
+  border: none; padding: 0.38rem 0.9rem;
+  border-radius: 8px; font-size: 0.72rem; font-weight: 700;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.mcard-btn:hover { background: var(--saffron); color: #fff; }
+.menu-view-all { text-align: center; margin-top: 2.5rem; }
+
+/* ===================== SERVICES ===================== */
+.services-sec { background: #fff; }
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.5rem; }
+.svc-card {
+  border-radius: 20px; padding: 2.2rem 2rem;
+  border: 2px solid transparent;
+  transition: all 0.3s; cursor: pointer;
+}
+.svc-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+.svc-icon-wrap {
+  width: 58px; height: 58px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; margin-bottom: 1.3rem;
+}
+.svc-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+.svc-desc { font-size: 0.83rem; color: var(--gray); line-height: 1.8; margin-bottom: 1.4rem; }
+.svc-link { font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
+.svc-card.orange { background: #FFF6ED; border-color: #FAD5A0; }
+.svc-card.orange .svc-icon-wrap { background: #FFE8C5; }
+.svc-card.orange .svc-link { color: var(--saffron); }
+.svc-card.rose { background: var(--rose-light); border-color: #F7B8CC; }
+.svc-card.rose .svc-icon-wrap { background: #FFCFE0; }
+.svc-card.rose .svc-link { color: var(--rose); }
+.svc-card.teal { background: var(--teal-light); border-color: #A5D9D0; }
+.svc-card.teal .svc-icon-wrap { background: #C2ECE5; }
+.svc-card.teal .svc-link { color: var(--teal); }
+
+/* ===================== BOOKING ===================== */
+.booking-sec { background: var(--ink); color: #fff; padding: 5.5rem 4rem; }
+.booking-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
+.booking-sec .sec-h { color: #fff; }
+.booking-sec .sec-h em { color: var(--turmeric); }
+.booking-sec .sec-p { color: rgba(255,255,255,0.55); margin-bottom: 2rem; }
+.binfo { display: flex; flex-direction: column; gap: 1.1rem; }
+.binfo-row { display: flex; gap: 14px; align-items: flex-start; }
+.binfo-icon {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+}
+.binfo-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 3px; }
+.binfo-val { font-size: 0.88rem; color: rgba(255,255,255,0.82); line-height: 1.6; }
+.binfo-val a { color: rgba(255,255,255,0.82); }
+.bform {
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 2.3rem;
+}
+.ftabs {
+  display: flex; gap: 6px; margin-bottom: 1.8rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px; padding: 4px;
+}
+.ftab {
+  flex: 1; padding: 0.55rem; font-size: 0.75rem; font-weight: 600;
+  background: transparent; color: rgba(255,255,255,0.45);
+  border: none; cursor: pointer; border-radius: 9px;
+  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.ftab.on { background: #fff; color: var(--ink); }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.fg { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+.fg label { font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.fg input, .fg select, .fg textarea {
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 10px; padding: 0.72rem 0.95rem;
+  font-size: 0.85rem; color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  outline: none; transition: border-color 0.2s; width: 100%;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--turmeric); }
+.fg select option { background: #2D2215; color: #fff; }
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,0.3); }
+.bsubmit {
+  width: 100%; background: var(--saffron); color: #fff;
+  border: none; padding: 0.95rem;
+  border-radius: 12px; font-size: 0.88rem; font-weight: 700;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s; margin-top: 6px;
+}
+.bsubmit:hover { background: var(--saffron-hover); transform: translateY(-1px); }
+.confirm-banner {
+  display: none; background: #0D7E6B; border-radius: 10px;
+  padding: 1rem 1.3rem; margin-bottom: 1.2rem;
+  font-size: 0.85rem; color: #fff; font-weight: 600; text-align: center;
+}
+.confirm-banner.show { display: block; }
+
+/* ===================== GALLERY ===================== */
+.gallery-sec { background: var(--lightgray); }
+.gal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 220px 220px;
+  gap: 10px; margin-top: 2.5rem;
+}
+.gitem { border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; }
+.gitem img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.55s; }
+.gitem:hover img { transform: scale(1.07); }
+.gitem.w2 { grid-column: span 2; }
+.gtag {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(255,255,255,0.92); padding: 5px 13px;
+  border-radius: 50px; font-size: 0.68rem; font-weight: 700;
+  color: var(--ink); opacity: 0; transition: all 0.3s;
+  transform: translateY(6px);
+}
+.gitem:hover .gtag { opacity: 1; transform: translateY(0); }
+
+/* ===================== TESTIMONIALS ===================== */
+.reviews-sec { background: #fff; }
+.stars { color: var(--turmeric); font-size: 0.9rem; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+.rcard {
+  background: var(--lightgray); border-radius: 18px;
+  padding: 1.8rem; border: 1.5px solid var(--border);
+  transition: all 0.25s;
+}
+.rcard:hover { border-color: var(--saffron); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(232,130,12,0.08); }
+.rtext {
+  font-family: 'Playfair Display', serif; font-size: 1rem;
+  font-style: italic; color: var(--ink2); line-height: 1.75; margin-bottom: 1.2rem;
+}
+.rname { font-size: 0.75rem; font-weight: 700; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; }
+.rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.5rem; }
+.reviews-cta { text-align: center; margin-top: 2.5rem; }
+
+/* ===================== INFO STRIP ===================== */
+.info-strip {
+  background: var(--saffron); padding: 2.5rem 4rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+}
+.istrip-label { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 6px; }
+.istrip-val { font-size: 0.92rem; font-weight: 600; color: #fff; line-height: 1.6; }
+.istrip-val a { color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 1px; }
+.istrip-val a:hover { border-color: #fff; }
+
+/* ===================== FAQ ===================== */
+.faq-sec { background: var(--lightgray); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
+.faq-item {
+  background: #fff; border-radius: 14px; padding: 1.5rem 1.6rem;
+  border: 1.5px solid var(--border); cursor: pointer;
+  transition: border-color 0.2s;
+}
+.faq-item:hover { border-color: var(--saffron); }
+.faq-q { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.faq-a { font-size: 0.82rem; color: var(--gray); line-height: 1.75; }
+.faq-icon { color: var(--saffron); font-size: 1.1rem; flex-shrink: 0; }
+
+/* ===================== FOOTER ===================== */
+.footer { background: var(--ink2); padding: 4.5rem 4rem 2rem; color: rgba(255,255,255,0.7); }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+.footer-brand .logo-text { color: #fff; font-size: 1.2rem; display: block; margin-bottom: 0.2rem; }
+.footer-brand .logo-sub { color: rgba(255,255,255,0.4); }
+.footer-brand p { font-size: 0.82rem; line-height: 1.85; margin-top: 1rem; color: rgba(255,255,255,0.45); max-width: 230px; }
+.footer-social { display: flex; gap: 8px; margin-top: 1.2rem; }
+.fsoc {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,0.07);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; color: rgba(255,255,255,0.6);
+  transition: all 0.2s; font-weight: 600;
+}
+.fsoc:hover { background: var(--saffron); color: #fff; }
+.footer-col h5 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--saffron); margin-bottom: 1.1rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-col ul li a { font-size: 0.83rem; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.footer-col ul li a:hover { color: #fff; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.8rem; display: flex;
+  justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.5rem;
+  font-size: 0.75rem; color: rgba(255,255,255,0.3);
+}
+
+/* ===================== STICKY CTA BAR ===================== */
+.sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: #fff; border-top: 1.5px solid var(--border);
+  padding: 0.8rem 2rem;
+  display: none; justify-content: center; gap: 1rem; align-items: center;
+  z-index: 300;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.08);
+}
+.sticky-bar.show { display: flex; }
+.sticky-bar span { font-size: 0.82rem; color: var(--gray); }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1024px) {
+  .sec, .booking-sec { padding: 4.5rem 2.5rem; }
+  .hero, .about { padding: 5rem 2.5rem 3.5rem; gap: 3rem; }
+  .info-strip { padding: 2rem 2.5rem; }
+  .footer { padding: 4rem 2.5rem 2rem; }
+  .nav { padding: 0 2rem; }
+}
+@media (max-width: 860px) {
+  .nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .hero { grid-template-columns: 1fr; min-height: auto; padding: 5.5rem 1.5rem 3rem; gap: 2.5rem; }
+  .hero-img-stack { grid-template-rows: 190px 130px; }
+  .hero-badge { top: -12px; right: -8px; width: 72px; height: 72px; }
+  .about { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+  .about-imgs { padding-bottom: 3rem; }
+  .menu-grid { grid-template-columns: 1fr 1fr; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .booking-wrap { grid-template-columns: 1fr; gap: 3rem; }
+  .frow { grid-template-columns: 1fr; }
+  .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gal-grid .gitem { min-height: 160px; }
+  .rgrid { grid-template-columns: 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .info-strip { grid-template-columns: 1fr 1fr; padding: 2rem 1.5rem; gap: 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .sec, .gallery-sec, .reviews-sec, .faq-sec { padding: 3.5rem 1.5rem; }
+  .booking-sec { padding: 3.5rem 1.5rem; }
+  .sticky-bar { padding: 0.7rem 1rem; }
+}
+@media (max-width: 480px) {
+  .menu-grid { grid-template-columns: 1fr; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .info-strip { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-stats { gap: 1.5rem; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn-fill, .hero-btns .btn-stroke { text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVIGATION ===================== -->
+<nav class="nav" id="mainNav">
+  <div class="logo-wrap">
+    <div class="logo-badge">IG</div>
+    <div>
+      <span class="logo-text">India Garden</span>
+      <div class="logo-sub">Pleasanton, California</div>
+    </div>
+  </div>
+  <nav class="nav-links">
+    <a href="#about">Our Story</a>
+    <a href="#menu">Menu</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#faq">FAQ</a>
+    <a href="#booking" class="nav-reserve">Reserve</a>
+    <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="nav-order">Order Online</a>
+  </nav>
+  <button class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">Our Story</a>
+  <a href="#menu">Menu</a>
+  <a href="#services">Services</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#faq">FAQ</a>
+  <a href="#booking">Reserve a Table</a>
+  <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" style="color:var(--saffron);font-weight:700">Order Online →</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-pill">
+      <span class="hero-pill-dot"></span>
+      Now Open · Pleasanton, CA
+    </div>
+    <h1>Authentic <em>Indian</em><br>Flavours, Crafted<br>with Love</h1>
+    <p class="hero-sub">From the clay tandoor to your table — North Indian cuisine made with tradition, passion, and the finest spices imported straight from India.</p>
+    <div class="hero-btns">
+      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="btn-fill">Order Online →</a>
+      <a href="#booking" class="btn-stroke">Book a Table</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-n">4.7★</div>
+        <div class="hstat-l">Google Rating</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">15+</div>
+        <div class="hstat-l">Years of Service</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">80+</div>
+        <div class="hstat-l">Dishes on Menu</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div style="position:relative">
+      <div class="hero-img-stack">
+        <div class="himg tall">
+          <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Butter-Chicken.avif" alt="Butter Chicken — India Garden Pleasanton" loading="eager">
+          <div class="himg-label">Butter Chicken</div>
+        </div>
+        <div class="himg">
+          <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Tandoori-Chicken-4-Leg-Quarters.avif" alt="Tandoori Chicken — India Garden Pleasanton" loading="eager">
+          <div class="himg-label">Tandoori Chicken</div>
+        </div>
+        <div class="himg">
+          <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Chicken-Biryani.avif" alt="Chicken Biryani — India Garden Pleasanton" loading="eager">
+          <div class="himg-label">Chicken Biryani</div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-num">4.7</div>
+        <div class="badge-txt">Google Stars</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TICKER ===================== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="tick-item">Dine In<span class="tick-sep"></span></span>
+    <span class="tick-item">Takeout<span class="tick-sep"></span></span>
+    <span class="tick-item">Delivery<span class="tick-sep"></span></span>
+    <span class="tick-item">Catering<span class="tick-sep"></span></span>
+    <span class="tick-item">Private Events<span class="tick-sep"></span></span>
+    <span class="tick-item">Wedding Catering<span class="tick-sep"></span></span>
+    <span class="tick-item">Outdoor Seating<span class="tick-sep"></span></span>
+    <span class="tick-item">Happy Hour<span class="tick-sep"></span></span>
+    <span class="tick-item">Reservations Welcome<span class="tick-sep"></span></span>
+    <span class="tick-item">Dine In<span class="tick-sep"></span></span>
+    <span class="tick-item">Takeout<span class="tick-sep"></span></span>
+    <span class="tick-item">Delivery<span class="tick-sep"></span></span>
+    <span class="tick-item">Catering<span class="tick-sep"></span></span>
+    <span class="tick-item">Private Events<span class="tick-sep"></span></span>
+    <span class="tick-item">Wedding Catering<span class="tick-sep"></span></span>
+    <span class="tick-item">Outdoor Seating<span class="tick-sep"></span></span>
+    <span class="tick-item">Happy Hour<span class="tick-sep"></span></span>
+    <span class="tick-item">Reservations Welcome<span class="tick-sep"></span></span>
+  </div>
+</div>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="sec about" id="about">
+  <div class="about-imgs">
+    <div class="aimg big">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/elementor/thumbs/India-garden-r5opl4qkmnkenl2pc8faga8rlrng1hfoxhmiojgnmo.webp" alt="India Garden Restaurant Pleasanton" loading="lazy">
+    </div>
+    <div class="aimg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Paneer-Tikka-Masala.avif" alt="Paneer Tikka Masala" loading="lazy">
+    </div>
+    <div class="aimg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Naan.avif" alt="Fresh Garlic Naan" loading="lazy">
+    </div>
+    <div class="about-pill">
+      <span class="about-pill-star">★★★★★</span>
+      Loved by Pleasanton since 2010
+    </div>
+  </div>
+  <div>
+    <div class="sec-chip" style="color:var(--saffron)"><span style="background:var(--saffron)"></span>Our Story</div>
+    <h2 class="sec-h">Where Every Dish<br>Tells a <em>Story</em></h2>
+    <p class="sec-p">At India Garden, 210 Rose Ave, Pleasanton — we cook the way it was always meant to be: with patience, fresh spices, and love passed down through generations. From slow-simmered curries to crisp tandoori, every plate honors the culinary soul of North India.</p>
+    <p class="sec-p" style="margin-top:0.8rem">Whether you're joining us for a casual lunch, a family celebration, or a grand catered event — you'll always leave with a full heart and a happy stomach.</p>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-icon" style="background:#FFF3E6">🔥</div>Traditional Tandoor Oven</div>
+      <div class="feat"><div class="feat-icon" style="background:#E6F7F4">🌿</div>Fresh Daily Sourced</div>
+      <div class="feat"><div class="feat-icon" style="background:#EDE7F6">🥗</div>Vegetarian Friendly</div>
+      <div class="feat"><div class="feat-icon" style="background:#FFF0F5">🎉</div>Private Event Hosting</div>
+      <div class="feat"><div class="feat-icon" style="background:#FFFBE8">👨‍👩‍👧</div>Family Atmosphere</div>
+      <div class="feat"><div class="feat-icon" style="background:#FFF3E6">🚚</div>Delivery & Takeout</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MENU ===================== -->
+<section class="sec menu-sec" id="menu">
+  <div class="sec-chip" style="color:var(--rose)"><span style="background:var(--rose)"></span>Signature Dishes</div>
+  <h2 class="sec-h">Our Most <em>Loved</em> Picks</h2>
+  <p class="sec-p">Every dish is prepared fresh with authentic recipes and hand-selected spices. Filter by category or browse them all.</p>
+  <div class="menu-tabs" role="tablist">
+    <button class="mtab on" onclick="filterMenu(this,'all')" role="tab" aria-selected="true">All Dishes</button>
+    <button class="mtab" onclick="filterMenu(this,'nonveg')" role="tab" aria-selected="false">Non-Veg</button>
+    <button class="mtab" onclick="filterMenu(this,'veg')" role="tab" aria-selected="false">Vegetarian</button>
+    <button class="mtab" onclick="filterMenu(this,'bread')" role="tab" aria-selected="false">Breads & Sides</button>
+    <button class="mtab" onclick="filterMenu(this,'dessert')" role="tab" aria-selected="false">Desserts</button>
+  </div>
+  <div class="menu-grid" id="menuGrid">
+    <div class="mcard" data-cat="nonveg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Butter-Chicken.avif" class="mcard-img" alt="Butter Chicken" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#FFF3E6;color:#C96500">Non-Veg · Chef's Pick</span>
+        <div class="mcard-name">Butter Chicken</div>
+        <div class="mcard-desc">Tender chicken in a velvety tomato-cream sauce, slow-simmered with aromatic spices and a touch of butter.</div>
+        <div class="mcard-foot"><span class="mcard-price">$18.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="nonveg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Tandoori-Chicken-4-Leg-Quarters.avif" class="mcard-img" alt="Tandoori Chicken" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#FFF0F5;color:#A62A55">Non-Veg · Tandoor</span>
+        <div class="mcard-name">Tandoori Chicken</div>
+        <div class="mcard-desc">Marinated overnight in yogurt and spices, roasted to perfection in our traditional clay oven.</div>
+        <div class="mcard-foot"><span class="mcard-price">$21.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="nonveg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Chicken-Biryani.avif" class="mcard-img" alt="Chicken Biryani" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#EDE7F6;color:#4A2E96">Non-Veg · Dum Style</span>
+        <div class="mcard-name">Chicken Biryani</div>
+        <div class="mcard-desc">Fragrant basmati rice slow-cooked with succulent chicken, saffron, caramelised onions, and whole spices.</div>
+        <div class="mcard-foot"><span class="mcard-price">$19.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="veg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Paneer-Tikka-Masala.avif" class="mcard-img" alt="Paneer Tikka Masala" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#E6F7F4;color:#0A6355">Vegetarian · Fan Fave</span>
+        <div class="mcard-name">Paneer Tikka Masala</div>
+        <div class="mcard-desc">Grilled cottage cheese cubes in a rich, smoky tomato-onion masala. A vegetarian classic.</div>
+        <div class="mcard-foot"><span class="mcard-price">$16.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="bread">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Naan.avif" class="mcard-img" alt="Garlic Naan" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#FFFBE8;color:#7A5A00">Bread · Tandoor</span>
+        <div class="mcard-name">Garlic Naan</div>
+        <div class="mcard-desc">Pillowy, charred flatbread brushed with garlic butter, baked fresh from the clay tandoor.</div>
+        <div class="mcard-foot"><span class="mcard-price">$3.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="veg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/Vegetable-Samosa.avif" class="mcard-img" alt="Vegetable Samosa" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#FFF0F5;color:#A62A55">Vegetarian · Starter</span>
+        <div class="mcard-name">Vegetable Samosa</div>
+        <div class="mcard-desc">Crispy golden pastry filled with spiced potatoes and peas, served with tangy mint chutney.</div>
+        <div class="mcard-foot"><span class="mcard-price">$7.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="dessert">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-11.jpg" class="mcard-img" alt="Gulab Jamun" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#FFF3E6;color:#C96500">Dessert · Classic</span>
+        <div class="mcard-name">Gulab Jamun</div>
+        <div class="mcard-desc">Soft milk-solid dumplings soaked in rose-scented sugar syrup. A perfect sweet finish.</div>
+        <div class="mcard-foot"><span class="mcard-price">$6.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="nonveg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-8.jpg" class="mcard-img" alt="Chicken Pakora" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#EDE7F6;color:#4A2E96">Non-Veg · Starter</span>
+        <div class="mcard-name">Chicken Pakora</div>
+        <div class="mcard-desc">Crispy fried chicken fritters marinated in spiced chickpea batter. A crowd favourite starter.</div>
+        <div class="mcard-foot"><span class="mcard-price">$13.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="veg">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-13.jpg" class="mcard-img" alt="Mixed Vegetable Curry" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#E6F7F4;color:#0A6355">Vegetarian · Curry</span>
+        <div class="mcard-name">Mixed Vegetable Curry</div>
+        <div class="mcard-desc">Seasonal vegetables slow-cooked in a fragrant North Indian masala. Comforting and wholesome.</div>
+        <div class="mcard-foot"><span class="mcard-price">$14.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="menu-view-all">
+    <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="btn-fill">View Full Menu & Order Online →</a>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="sec services-sec" id="services">
+  <div class="sec-chip" style="color:var(--teal)"><span style="background:var(--teal)"></span>What We Offer</div>
+  <h2 class="sec-h">Dining, Catering<br>& <em>More</em></h2>
+  <p class="sec-p">Whether you're ordering for one or planning for five hundred — India Garden has you covered end to end.</p>
+  <div class="svc-grid">
+    <div class="svc-card orange">
+      <div class="svc-icon-wrap">🛵</div>
+      <div class="svc-name">Online Ordering</div>
+      <div class="svc-desc">Get your favourites delivered fresh to your door or ready for pickup. Fast, reliable, and always made to order — powered by our online ordering system.</div>
+      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="svc-link">Order Now →</a>
+    </div>
+    <div class="svc-card rose">
+      <div class="svc-icon-wrap">🍽️</div>
+      <div class="svc-name">Catering</div>
+      <div class="svc-desc">From intimate family dinners to grand weddings and corporate events — our catering team brings authentic Indian flavours to your occasion with custom menus.</div>
+      <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" class="svc-link">Inquire About Catering →</a>
+    </div>
+    <div class="svc-card teal">
+      <div class="svc-icon-wrap">📅</div>
+      <div class="svc-name">Table Reservations</div>
+      <div class="svc-desc">Reserve your table in advance and walk in to a warm welcome. Perfect for date nights, family dinners, birthday celebrations, or business lunches.</div>
+      <a href="#booking" class="svc-link">Book a Table →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BOOKING / RESERVATION ===================== -->
+<section class="booking-sec" id="booking">
+  <div class="booking-wrap">
+    <div>
+      <div class="sec-chip" style="color:var(--turmeric)"><span style="background:var(--turmeric)"></span>Visit Us</div>
+      <h2 class="sec-h">Plan Your<br><em>Perfect</em> Visit</h2>
+      <p class="sec-p">Reserve a table, inquire about catering, or just say hello. We respond to every request promptly — usually within a few hours.</p>
+      <div class="binfo">
+        <div class="binfo-row">
+          <div class="binfo-icon">📍</div>
+          <div>
+            <div class="binfo-label">Address</div>
+            <div class="binfo-val">210 Rose Ave, Pleasanton, CA 94566</div>
+          </div>
+        </div>
+        <div class="binfo-row">
+          <div class="binfo-icon">📞</div>
+          <div>
+            <div class="binfo-label">Phone</div>
+            <div class="binfo-val"><a href="tel:9254854800">(925) 485-4800</a></div>
+          </div>
+        </div>
+        <div class="binfo-row">
+          <div class="binfo-icon">✉️</div>
+          <div>
+            <div class="binfo-label">Email</div>
+            <div class="binfo-val"><a href="mailto:info@indiagardenpleasanton.com">info@indiagardenpleasanton.com</a></div>
+          </div>
+        </div>
+        <div class="binfo-row">
+          <div class="binfo-icon">🕐</div>
+          <div>
+            <div class="binfo-label">Hours</div>
+            <div class="binfo-val">
+              Sun – Thu: 11am – 3pm, 4:30 – 9pm<br>
+              Fri – Sat: 11am – 3pm, 4:30 – 9:30pm
+            </div>
+          </div>
+        </div>
+        <div class="binfo-row">
+          <div class="binfo-icon">🚗</div>
+          <div>
+            <div class="binfo-label">Parking</div>
+            <div class="binfo-val">Free parking available on-site</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bform">
+      <div id="confirmBanner" class="confirm-banner">
+        ✅ Request received! We'll confirm your booking shortly. You can also call us at (925) 485-4800 for instant confirmation.
+      </div>
+      <div class="ftabs">
+        <button class="ftab on" onclick="switchBTab(this,'rf')">Reserve Table</button>
+        <button class="ftab" onclick="switchBTab(this,'cf')">Catering</button>
+        <button class="ftab" onclick="switchBTab(this,'mf')">Message Us</button>
+      </div>
+
+      <!-- Reserve Table -->
+      <div id="rf">
+        <div class="frow">
+          <div class="fg"><label for="r-fname">First Name</label><input type="text" id="r-fname" placeholder="Priya" autocomplete="given-name"></div>
+          <div class="fg"><label for="r-lname">Last Name</label><input type="text" id="r-lname" placeholder="Sharma" autocomplete="family-name"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label for="r-phone">Phone</label><input type="tel" id="r-phone" placeholder="(925) 000-0000" autocomplete="tel"></div>
+          <div class="fg"><label for="r-email">Email</label><input type="email" id="r-email" placeholder="you@email.com" autocomplete="email"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label for="r-date">Date</label><input type="date" id="r-date"></div>
+          <div class="fg"><label for="r-time">Time</label><input type="time" id="r-time" value="19:00"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label for="r-guests">Guests</label>
+            <select id="r-guests">
+              <option>1 Guest</option>
+              <option>2 Guests</option>
+              <option>3 Guests</option>
+              <option selected>4 Guests</option>
+              <option>5 Guests</option>
+              <option>6 Guests</option>
+              <option>7 Guests</option>
+              <option>8+ Guests</option>
+            </select>
+          </div>
+          <div class="fg"><label for="r-occasion">Occasion</label>
+            <select id="r-occasion">
+              <option>Casual Dinner</option>
+              <option>Birthday Celebration</option>
+              <option>Anniversary</option>
+              <option>Business Lunch/Dinner</option>
+              <option>Family Gathering</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label for="r-notes">Special Requests</label><textarea id="r-notes" rows="2" placeholder="Dietary needs, seating preferences, high chair..." style="resize:none"></textarea></div>
+        <button class="bsubmit" onclick="submitForm('reserve')">Confirm Reservation →</button>
+      </div>
+
+      <!-- Catering -->
+      <div id="cf" style="display:none">
+        <div class="frow">
+          <div class="fg"><label for="c-name">Your Name</label><input type="text" id="c-name" placeholder="Full name" autocomplete="name"></div>
+          <div class="fg"><label for="c-phone">Phone</label><input type="tel" id="c-phone" placeholder="(925) 000-0000" autocomplete="tel"></div>
+        </div>
+        <div class="fg"><label for="c-email">Email</label><input type="email" id="c-email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="frow">
+          <div class="fg"><label for="c-date">Event Date</label><input type="date" id="c-date"></div>
+          <div class="fg"><label for="c-count">Guest Count</label><input type="number" id="c-count" placeholder="50" min="10"></div>
+        </div>
+        <div class="fg"><label for="c-type">Event Type</label>
+          <select id="c-type">
+            <option>Wedding</option>
+            <option>Corporate Event</option>
+            <option>Birthday Party</option>
+            <option>Religious Ceremony / Puja</option>
+            <option>Graduation Party</option>
+            <option>Baby Shower</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label for="c-details">Tell Us More</label><textarea id="c-details" rows="3" placeholder="Venue address, menu preferences, budget, dietary restrictions..." style="resize:none"></textarea></div>
+        <button class="bsubmit" onclick="submitForm('catering')">Send Catering Inquiry →</button>
+      </div>
+
+      <!-- Message Us -->
+      <div id="mf" style="display:none">
+        <div class="fg"><label for="m-name">Your Name</label><input type="text" id="m-name" placeholder="Your name" autocomplete="name"></div>
+        <div class="fg"><label for="m-email">Email</label><input type="email" id="m-email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="fg"><label for="m-subject">Subject</label>
+          <select id="m-subject">
+            <option>General Inquiry</option>
+            <option>Menu Question</option>
+            <option>Feedback</option>
+            <option>Catering</option>
+            <option>Job Opportunity</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label for="m-message">Message</label><textarea id="m-message" rows="4" placeholder="How can we help you today?" style="resize:none"></textarea></div>
+        <button class="bsubmit" onclick="submitForm('message')">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section class="sec gallery-sec" id="gallery">
+  <div class="sec-chip" style="color:var(--purple)"><span style="background:var(--purple)"></span>Our Gallery</div>
+  <h2 class="sec-h">A Feast for<br>the <em>Eyes</em></h2>
+  <p class="sec-p">Every dish tells a story. Here's a glimpse into our kitchen's finest creations.</p>
+  <div class="gal-grid">
+    <div class="gitem w2">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-5.jpg" alt="Samosa Chaat" loading="lazy">
+      <div class="gtag">Samosa Chaat</div>
+    </div>
+    <div class="gitem">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-4.jpg" alt="Tandoori Chicken Tikka" loading="lazy">
+      <div class="gtag">Chicken Tikka</div>
+    </div>
+    <div class="gitem">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-6.jpg" alt="Sizzling Tandoori" loading="lazy">
+      <div class="gtag">Tandoori Sizzler</div>
+    </div>
+    <div class="gitem">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-13.jpg" alt="Mixed Vegetable Curry" loading="lazy">
+      <div class="gtag">Veg Curry</div>
+    </div>
+    <div class="gitem w2">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-14.jpg" alt="Biryani" loading="lazy">
+      <div class="gtag">Biryani</div>
+    </div>
+    <div class="gitem">
+      <img src="https://indiagardenpleasanton.com/wp-content/uploads/2025/05/o-11.jpg" alt="Gulab Jamun" loading="lazy">
+      <div class="gtag">Gulab Jamun</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="sec reviews-sec" id="reviews">
+  <div class="sec-chip" style="color:var(--saffron)"><span style="background:var(--saffron)"></span>Guest Reviews</div>
+  <h2 class="sec-h">What Our Guests<br><em>Say</em></h2>
+  <p class="sec-p">Hundreds of happy guests share their love for India Garden. Here are just a few of their stories.</p>
+  <div class="rgrid">
+    <div class="rcard">
+      <div class="stars">★★★★★</div>
+      <p class="rtext">"This gem of Pleasanton always makes their food hit every time! You literally feel like you're coming into their home — warm, welcoming, and absolutely delicious."</p>
+      <div class="rname">— Joie C. · Google Review</div>
+    </div>
+    <div class="rcard">
+      <div class="stars">★★★★★</div>
+      <p class="rtext">"Never disappointed with their service. The food quality is great and so is the ambiance. Staff is attentive, friendly, and our kids absolutely love this place for Indian food."</p>
+      <div class="rname">— Jo S. · Google Review</div>
+    </div>
+    <div class="rcard">
+      <div class="stars">★★★★★</div>
+      <p class="rtext">"Probably the best Indian food in the valley. Chicken korma was incredible. The rice was generous, plump, moist and fresh — even for delivery. Thoroughly impressed."</p>
+      <div class="rname">— Zach G. · Google Review</div>
+    </div>
+  </div>
+  <div class="reviews-cta">
+    <a href="https://www.google.com/search?q=India+Garden+Pleasanton+reviews" target="_blank" class="btn-stroke">Read All Reviews on Google →</a>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sec faq-sec" id="faq">
+  <div class="sec-chip" style="color:var(--teal)"><span style="background:var(--teal)"></span>FAQ</div>
+  <h2 class="sec-h">Common <em>Questions</em></h2>
+  <p class="sec-p">Quick answers to what our guests ask most.</p>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">What are you known for? <span class="faq-icon">🍛</span></div>
+      <div class="faq-a">We're best known for our Butter Chicken, Chicken Tikka Masala, Tandoori Chicken, Paneer Tikka Masala, Garlic Naan, Chicken Biryani, Lamb Curry, and Vegetable Samosa.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What meals do you serve? <span class="faq-icon">🕐</span></div>
+      <div class="faq-a">We serve Lunch and Dinner. Lunch hours are 11am – 3pm and Dinner hours are 4:30pm – 9pm (9:30pm on Fri & Sat).</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you offer delivery or takeout? <span class="faq-icon">🚚</span></div>
+      <div class="faq-a">Yes! We offer both takeout and delivery. You can place your order online at our ordering portal or call us directly at (925) 485-4800.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you offer catering? <span class="faq-icon">🎉</span></div>
+      <div class="faq-a">Absolutely. We cater for weddings, corporate events, birthdays, religious ceremonies, and all special occasions. Use the inquiry form above or visit our catering portal.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you have vegetarian options? <span class="faq-icon">🥗</span></div>
+      <div class="faq-a">Yes, we have a wide selection of vegetarian dishes including Paneer Tikka Masala, Palak Paneer, Dal Makhani, Vegetable Biryani, Samosa, and many more.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Where are you located? <span class="faq-icon">📍</span></div>
+      <div class="faq-a">We are located at 210 Rose Ave, Pleasanton, CA 94566. Free parking is available on-site. We're easy to find right in the heart of Pleasanton.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INFO STRIP ===================== -->
+<div class="info-strip" id="contact">
+  <div class="istrip-item">
+    <div class="istrip-label">Address</div>
+    <div class="istrip-val">210 Rose Ave<br>Pleasanton, CA 94566</div>
+  </div>
+  <div class="istrip-item">
+    <div class="istrip-label">Phone</div>
+    <div class="istrip-val"><a href="tel:9254854800">(925) 485-4800</a></div>
+  </div>
+  <div class="istrip-item">
+    <div class="istrip-label">Hours</div>
+    <div class="istrip-val">
+      Sun–Thu: 11am – 9pm<br>
+      Fri–Sat: 11am – 9:30pm
+    </div>
+  </div>
+  <div class="istrip-item">
+    <div class="istrip-label">Order & Social</div>
+    <div class="istrip-val">
+      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank">Order Online →</a><br>
+      <a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank">@indiagardenpleasanton</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-text">India Garden</span>
+      <div class="logo-sub">Pleasanton, California</div>
+      <p>Authentic North Indian cuisine made with heart. Dine-in, takeout, delivery, and catering — always crafted with tradition, love, and the freshest ingredients.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/indiagardenn/" target="_blank" class="fsoc" aria-label="Facebook">FB</a>
+        <a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank" class="fsoc" aria-label="Instagram">IG</a>
+        <a href="https://www.google.com/search?q=India+Garden+Pleasanton" target="_blank" class="fsoc" aria-label="Google Reviews">G★</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Navigate</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="https://order.boons.io/site/indian-garden/300/y" target="_blank">Order Online</a></li>
+        <li><a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank">Catering</a></li>
+        <li><a href="#booking">Table Reservation</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="https://www.boons.io/terms-of-service" target="_blank">Terms of Service</a></li>
+        <li><a href="https://www.boons.io/privacy-policy" target="_blank">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:9254854800">(925) 485-4800</a></li>
+        <li><a href="mailto:info@indiagardenpleasanton.com">Email Us</a></li>
+        <li><a href="https://maps.google.com/?q=210+Rose+Ave+Pleasanton+CA" target="_blank">Get Directions</a></li>
+        <li><a href="https://www.facebook.com/indiagardenn/" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank">Instagram</a></li>
+        <li><a href="https://www.google.com/search?q=India+Garden+Pleasanton" target="_blank">Google Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 India Garden Pleasanton · All rights reserved</span>
+    <span>210 Rose Ave, Pleasanton, CA 94566 · (925) 485-4800</span>
+  </div>
+</footer>
+
+<!-- ===================== STICKY BOTTOM BAR (mobile) ===================== -->
+<div class="sticky-bar" id="stickyBar">
+  <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="btn-fill" style="padding:0.7rem 1.5rem;font-size:0.82rem">🛵 Order Online</a>
+  <a href="#booking" class="btn-stroke" style="padding:0.7rem 1.5rem;font-size:0.82rem">📅 Reserve Table</a>
+</div>
+
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+/* Nav scroll shadow */
+var nav = document.getElementById('mainNav');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+/* Mobile menu toggle */
+function toggleMenu() {
+  var m = document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+document.querySelectorAll('#mobileMenu a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  });
+});
+
+/* Menu filter */
+function filterMenu(btn, cat) {
+  document.querySelectorAll('.mtab').forEach(function(t) {
+    t.classList.remove('on');
+    t.setAttribute('aria-selected', 'false');
+  });
+  btn.classList.add('on');
+  btn.setAttribute('aria-selected', 'true');
+  var cards = document.querySelectorAll('.mcard');
+  var visible = 0;
+  cards.forEach(function(c) {
+    if (cat === 'all' || c.dataset.cat === cat) {
+      c.style.display = 'block';
+      visible++;
+    } else {
+      c.style.display = 'none';
+    }
+  });
+}
+
+/* Booking form tab switch */
+function switchBTab(btn, id) {
+  document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('on'); });
+  btn.classList.add('on');
+  var forms = ['rf', 'cf', 'mf'];
+  forms.forEach(function(f) {
+    document.getElementById(f).style.display = f === id ? 'block' : 'none';
+  });
+  document.getElementById('confirmBanner').classList.remove('show');
+}
+
+/* Form submission simulation — replace with real backend/Formspree integration */
+function submitForm(type) {
+  var banner = document.getElementById('confirmBanner');
+  banner.classList.add('show');
+  banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  setTimeout(function() { banner.classList.remove('show'); }, 7000);
+}
+
+/* Sticky bar show on scroll */
+var stickyBar = document.getElementById('stickyBar');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 400) {
+    stickyBar.classList.add('show');
+  } else {
+    stickyBar.classList.remove('show');
+  }
+});
+
+/* Smooth scroll for anchor links */
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      var offset = 80;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
