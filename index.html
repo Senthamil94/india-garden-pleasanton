@@ -555,7 +555,7 @@ a { text-decoration: none; }
   .svc-grid { grid-template-columns: 1fr; }
   .booking-wrap { grid-template-columns: 1fr; gap: 3rem; }
   .frow { grid-template-columns: 1fr; }
-  .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .gal-grid { grid-template-columns: repeat(4, 1fr); grid-template-rows: auto; }
   .gal-grid .gitem { min-height: 160px; }
   .rgrid { grid-template-columns: 1fr; }
   .faq-grid { grid-template-columns: 1fr; }
@@ -563,6 +563,12 @@ a { text-decoration: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .sec, .gallery-sec, .reviews-sec, .faq-sec { padding: 3.5rem 1.5rem; }
   .booking-sec { padding: 3.5rem 1.5rem; }
+}
+@media (max-width: 556px) {
+  .gal-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+  }
 }
 @media (max-width: 480px) {
   .menu-grid { grid-template-columns: 1fr; }
