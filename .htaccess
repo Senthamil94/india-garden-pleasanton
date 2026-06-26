@@ -1,0 +1,10 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Force HTTPS and WWW
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} !^www\.indiagardenpleasanton\.com$ [NC]
+RewriteRule ^(.*)$ https://www.indiagardenpleasanton.com/$1 [L,R=301]
+
+# Optional: Set default index file
+DirectoryIndex index.html
