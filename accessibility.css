@@ -1,0 +1,418 @@
+/* ============================================================
+   India Garden — Accessibility Tools Widget
+   WCAG 2.1 / 2.2 AA helper styles
+   ============================================================ */
+
+/* ---------- Widget shell ---------- */
+.a11y-widget-root {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  z-index: 9999;
+  font-family: Arial, Verdana, sans-serif;
+  pointer-events: none;
+}
+
+.a11y-widget-trigger {
+  pointer-events: auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  position: relative;
+  z-index: 3;
+}
+
+.a11y-widget-trigger:hover,
+.a11y-widget-trigger:focus-visible {
+  background: #E8820C;
+  outline: 3px solid #F5C842;
+  outline-offset: 2px;
+}
+
+.a11y-widget-trigger .fa-wheelchair {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.a11y-widget-panel {
+  pointer-events: auto;
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  width: min(320px, calc(100vw - 2.5rem));
+  max-height: min(70vh, 520px);
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #d8d0c4;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(26, 18, 8, 0.18);
+  padding: 0;
+  z-index: 3;
+}
+
+.a11y-widget-panel.is-open {
+  display: block;
+}
+
+.a11y-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem 0.75rem;
+  border-bottom: 1px solid #ede5d8;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.a11y-widget-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a1208;
+  margin: 0;
+}
+
+.a11y-widget-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #6b5e4e;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.a11y-widget-close:hover,
+.a11y-widget-close:focus-visible {
+  background: #f5f0ea;
+  outline: 2px solid #F5C842;
+}
+
+.a11y-widget-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.a11y-widget-item {
+  margin: 0;
+}
+
+.a11y-widget-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2d2215;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.a11y-widget-action:hover,
+.a11y-widget-action:focus-visible {
+  background: #f5f0ea;
+  outline: none;
+  box-shadow: inset 3px 0 0 #E8820C;
+}
+
+.a11y-widget-action[aria-pressed="true"] {
+  background: #fff3e6;
+  font-weight: 600;
+}
+
+.a11y-widget-action svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: #1a1208;
+}
+
+.a11y-widget-action--reset {
+  color: #c9700a;
+  border-top: 1px solid #ede5d8;
+  margin-top: 0.25rem;
+}
+
+.a11y-widget-status {
+  padding: 0.5rem 1rem 0.75rem;
+  font-size: 0.75rem;
+  color: #6b5e4e;
+  border-top: 1px solid #ede5d8;
+}
+
+.a11y-widget-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: transparent;
+  pointer-events: none;
+}
+
+.a11y-widget-overlay.is-visible {
+  display: block;
+}
+
+/* ---------- Text scaling (applied via JS to html) ---------- */
+html.a11y-text-scaled body {
+  font-size: inherit;
+}
+
+/* Keep widget UI at a consistent size */
+.a11y-widget-root {
+  font-size: 16px !important;
+}
+.a11y-reading-guide {
+  display: none;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #E8820C;
+  box-shadow: 0 0 0 1px #1a1208, 0 2px 8px rgba(232, 130, 12, 0.5);
+  z-index: 9997;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.a11y-reading-guide.is-active {
+  display: block;
+}
+
+/* ---------- Feature: readable font ---------- */
+html.a11y-readable-font,
+html.a11y-readable-font body {
+  font-family: Arial, Verdana, "Atkinson Hyperlegible", sans-serif !important;
+}
+
+html.a11y-readable-font .sec-h,
+html.a11y-readable-font .hero h1,
+html.a11y-readable-font .mcard-name,
+html.a11y-readable-font .svc-name {
+  font-family: Arial, Verdana, "Atkinson Hyperlegible", sans-serif !important;
+}
+
+/* ---------- Feature: underline links ---------- */
+html.a11y-underline-links a {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Feature: highlight links ---------- */
+html.a11y-highlight-links a {
+  background-color: #fff3e6 !important;
+  color: #1a1208 !important;
+  padding: 0 2px;
+  border-radius: 2px;
+  box-decoration-break: clone;
+}
+
+/* ---------- Feature: highlight headings ---------- */
+html.a11y-highlight-headings h1,
+html.a11y-highlight-headings h2,
+html.a11y-highlight-headings h3,
+html.a11y-highlight-headings h4,
+html.a11y-highlight-headings h5,
+html.a11y-highlight-headings h6 {
+  background-color: #fffbe8 !important;
+  color: #1a1208 !important;
+  padding: 0.15em 0.35em;
+  border-left: 4px solid #E8820C;
+  border-radius: 2px;
+}
+
+/* ---------- Feature: stop animations ---------- */
+html.a11y-stop-animations *,
+html.a11y-stop-animations *::before,
+html.a11y-stop-animations *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ---------- Feature: grayscale (via filter on html) ---------- */
+/* Applied via inline style in JS: filter: grayscale(100%) ... */
+
+/* ---------- Feature: high contrast ---------- */
+html.a11y-high-contrast body {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+html.a11y-high-contrast .nav,
+html.a11y-high-contrast .mobile-menu,
+html.a11y-high-contrast .sec,
+html.a11y-high-contrast .menu-sec,
+html.a11y-high-contrast .gallery-sec,
+html.a11y-high-contrast .reviews-sec,
+html.a11y-high-contrast .faq-sec,
+html.a11y-high-contrast .services-sec,
+html.a11y-high-contrast .about,
+html.a11y-high-contrast .hero,
+html.a11y-high-contrast .mcard,
+html.a11y-high-contrast .rcard,
+html.a11y-high-contrast .faq-item,
+html.a11y-high-contrast .svc-card {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+html.a11y-high-contrast .sec-h,
+html.a11y-high-contrast .hero h1,
+html.a11y-high-contrast .mcard-name,
+html.a11y-high-contrast h1,
+html.a11y-high-contrast h2,
+html.a11y-high-contrast h3 {
+  color: #fff !important;
+}
+
+html.a11y-high-contrast .sec-p,
+html.a11y-high-contrast .hero-sub,
+html.a11y-high-contrast .mcard-desc,
+html.a11y-high-contrast .gray,
+html.a11y-high-contrast .hstat-l {
+  color: #e0e0e0 !important;
+}
+
+html.a11y-high-contrast a {
+  color: #ffff00 !important;
+  text-decoration: underline !important;
+}
+
+html.a11y-high-contrast .btn-fill {
+  background: #ffff00 !important;
+  color: #000 !important;
+  border: 2px solid #fff !important;
+}
+
+html.a11y-high-contrast .btn-stroke {
+  background: #000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+html.a11y-high-contrast .booking-sec {
+  background: #000 !important;
+}
+
+html.a11y-high-contrast .info-strip {
+  background: #1a1a1a !important;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+html.a11y-high-contrast .footer {
+  background: #000 !important;
+}
+
+/* ---------- Feature: dark mode ---------- */
+html.a11y-dark-mode body {
+  background: #1a1208 !important;
+  color: #f5f0ea !important;
+}
+
+html.a11y-dark-mode .nav,
+html.a11y-dark-mode .mobile-menu {
+  background: #2d2215 !important;
+  border-color: #4a3d2e !important;
+}
+
+html.a11y-dark-mode .nav-links a,
+html.a11y-dark-mode .logo-text {
+  color: #f5f0ea !important;
+}
+
+html.a11y-dark-mode .hero,
+html.a11y-dark-mode .about,
+html.a11y-dark-mode .services-sec,
+html.a11y-dark-mode .reviews-sec {
+  background: #1a1208 !important;
+}
+
+html.a11y-dark-mode .menu-sec,
+html.a11y-dark-mode .gallery-sec,
+html.a11y-dark-mode .faq-sec {
+  background: #2d2215 !important;
+}
+
+html.a11y-dark-mode .mcard,
+html.a11y-dark-mode .rcard,
+html.a11y-dark-mode .faq-item,
+html.a11y-dark-mode .svc-card.orange,
+html.a11y-dark-mode .svc-card.rose,
+html.a11y-dark-mode .svc-card.teal {
+  background: #3d3020 !important;
+  border-color: #5a4a38 !important;
+}
+
+html.a11y-dark-mode .sec-h,
+html.a11y-dark-mode .hero h1,
+html.a11y-dark-mode .mcard-name {
+  color: #fff !important;
+}
+
+html.a11y-dark-mode .sec-p,
+html.a11y-dark-mode .hero-sub,
+html.a11y-dark-mode .mcard-desc {
+  color: #c8bfb5 !important;
+}
+
+html.a11y-dark-mode .feat {
+  background: #3d3020 !important;
+  color: #f5f0ea !important;
+}
+
+/* ---------- Enhanced keyboard focus (widget + page) ---------- */
+html.a11y-enhanced-focus :focus-visible {
+  outline: 3px solid #F5C842 !important;
+  outline-offset: 3px !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .a11y-widget-root {
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  .a11y-widget-trigger {
+    width: 48px;
+    height: 48px;
+  }
+
+  .a11y-widget-panel {
+    width: calc(100vw - 2rem);
+    max-height: 65vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .a11y-widget-trigger,
+  .a11y-widget-action {
+    transition: none;
+  }
+}

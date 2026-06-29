@@ -16,6 +16,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="accessibility.css">
 <style>
 /* ===================== RESET & BASE ===================== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,8 +40,44 @@
   --lightgray: #F5F0EA;
   --border: #EDE5D8;
   --white: #FFFFFF;
+  --focus-ring: #F5C842;
+  --label-muted: rgba(255,255,255,0.78);
 }
 html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; top: -100%; left: 1rem;
+  z-index: 1000; background: var(--ink); color: #fff;
+  padding: 0.75rem 1.25rem; border-radius: 0 0 8px 8px;
+  font-weight: 600; font-size: 0.9rem;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
 body {
   background: #fff;
   color: var(--ink);
@@ -348,7 +386,7 @@ a { text-decoration: none; }
 .booking-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
 .booking-sec .sec-h { color: #fff; }
 .booking-sec .sec-h em { color: var(--turmeric); }
-.booking-sec .sec-p { color: rgba(255,255,255,0.55); margin-bottom: 2rem; }
+.booking-sec .sec-p { color: rgba(255,255,255,0.72); margin-bottom: 2rem; }
 .binfo { display: flex; flex-direction: column; gap: 1.1rem; }
 .binfo-row { display: flex; gap: 14px; align-items: flex-start; }
 .binfo-icon {
@@ -357,7 +395,7 @@ a { text-decoration: none; }
   border-radius: 10px; display: flex; align-items: center;
   justify-content: center; font-size: 1.1rem; flex-shrink: 0;
 }
-.binfo-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 3px; }
+.binfo-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--label-muted); margin-bottom: 3px; }
 .binfo-val { font-size: 0.88rem; color: rgba(255,255,255,0.82); line-height: 1.6; }
 .binfo-val a { color: rgba(255,255,255,0.82); }
 .bform {
@@ -379,7 +417,8 @@ a { text-decoration: none; }
 .ftab.on { background: #fff; color: var(--ink); }
 .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 .fg { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
-.fg label { font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.fg label { font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label-muted); }
+.fg .req { color: var(--turmeric); margin-left: 2px; }
 .fg input, .fg select, .fg textarea {
   background: rgba(255,255,255,0.07);
   border: 1.5px solid rgba(255,255,255,0.12);
@@ -458,14 +497,28 @@ a { text-decoration: none; }
 .faq-sec { background: var(--lightgray); }
 .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
 .faq-item {
-  background: #fff; border-radius: 14px; padding: 1.5rem 1.6rem;
-  border: 1.5px solid var(--border); cursor: pointer;
+  background: #fff; border-radius: 14px;
+  border: 1.5px solid var(--border);
   transition: border-color 0.2s;
 }
-.faq-item:hover { border-color: var(--saffron); }
-.faq-q { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.6rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-.faq-a { font-size: 0.82rem; color: var(--gray); line-height: 1.75; }
-.faq-icon { color: var(--saffron); font-size: 1.1rem; flex-shrink: 0; }
+.faq-item[open] { border-color: var(--saffron); }
+.faq-item summary {
+  list-style: none; cursor: pointer;
+  padding: 1.5rem 1.6rem;
+  font-size: 0.9rem; font-weight: 600; color: var(--ink);
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+'; color: var(--saffron); font-size: 1.1rem; flex-shrink: 0;
+  font-weight: 700; line-height: 1;
+}
+.faq-item[open] summary::after { content: '−'; }
+.faq-item .faq-a { padding: 0 1.6rem 1.5rem; font-size: 0.82rem; color: var(--gray); line-height: 1.75; }
+.faq-item .faq-a a { color: var(--teal); text-decoration: underline; font-weight: 600; }
+.gitem figcaption { margin: 0; }
+blockquote.rcard { margin: 0; }
+.faq-q { display: none; }
 
 /* ===================== FOOTER ===================== */
 .footer { background: var(--ink2); padding: 4.5rem 4rem 0; color: rgba(255,255,255,0.7); }
@@ -535,6 +588,13 @@ a { text-decoration: none; }
   vertical-align: middle;
 }
 
+.mtab:focus-visible { box-shadow: 0 0 0 3px var(--focus-ring); }
+.ftab:focus-visible { box-shadow: 0 0 0 2px var(--focus-ring); }
+.gitem { cursor: default; }
+.gitem:focus-within { outline: 3px solid var(--focus-ring); outline-offset: 2px; border-radius: 16px; }
+.svc-card { cursor: default; }
+.mcard { cursor: default; }
+
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 1024px) {
   .sec, .booking-sec { padding: 4.5rem 2.5rem; }
@@ -585,60 +645,63 @@ a { text-decoration: none; }
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Skip to Main Content</a>
+
 <!-- ===================== NAVIGATION ===================== -->
-<nav class="nav" id="mainNav">
-  <a href="#home" class="logo-wrap">
-    <img src="assets/logo.png" alt="India Garden Pleasanton" class="logo-img">
+<header class="nav" id="mainNav" role="banner">
+  <a href="#home" class="logo-wrap" aria-label="India Garden Pleasanton — Home">
+    <img src="assets/logo.png" alt="" class="logo-img" width="48" height="48">
   </a>
-  <nav class="nav-links">
+  <nav class="nav-links" aria-label="Primary navigation">
     <a href="#about">Our Story</a>
     <a href="#menu">Menu</a>
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
     <a href="#faq">FAQ</a>
     <a href="#booking" class="nav-reserve">Reserve</a>
-    <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" class="nav-catering">Catering</a>
-    <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="nav-order">Order Online</a>
+    <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="nav-catering">Catering<span class="sr-only"> (opens in new tab)</span></a>
+    <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="nav-order">Order Online<span class="sr-only"> (opens in new tab)</span></a>
   </nav>
-  <button class="nav-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
   </button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
+</header>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" aria-hidden="true">
   <a href="#about">Our Story</a>
   <a href="#menu">Menu</a>
   <a href="#services">Services</a>
   <a href="#gallery">Gallery</a>
   <a href="#faq">FAQ</a>
   <a href="#booking">Reserve a Table</a>
-  <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" style="color:var(--teal);font-weight:700">Catering →</a>
-  <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" style="color:var(--saffron);font-weight:700">Order Online →</a>
-</div>
+  <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-weight:700">Catering<span class="sr-only"> (opens in new tab)</span></a>
+  <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" style="color:var(--saffron);font-weight:700">Order Online<span class="sr-only"> (opens in new tab)</span></a>
+</nav>
 
+<main id="main-content" tabindex="-1">
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="home">
   <div class="hero-left">
     <div class="hero-pill">
-      <span class="hero-pill-dot"></span>
+      <span class="hero-pill-dot" aria-hidden="true"></span>
       Now Open · Pleasanton, CA
     </div>
     <h1>Authentic <em>Indian</em><br>Flavours, Crafted<br>with Love</h1>
     <p class="hero-sub">From the clay tandoor to your table — North Indian cuisine made with tradition, passion, and the finest spices imported straight from India.</p>
     <div class="hero-btns">
-      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="btn-fill">Order Online →</a>
-      <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" class="btn-stroke" style="border-color:var(--teal);color:var(--teal)">Catering →</a>
+      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="btn-fill">Order Online<span aria-hidden="true"> →</span><span class="sr-only"> (opens in new tab)</span></a>
+      <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="btn-stroke" style="border-color:var(--teal);color:var(--teal)">Catering<span aria-hidden="true"> →</span><span class="sr-only"> (opens in new tab)</span></a>
       <a href="#booking" class="btn-stroke">Book a Table</a>
     </div>
-    <div class="hero-stats">
-      <div class="hstat">
-        <div class="hstat-n">4.7★</div>
+    <div class="hero-stats" role="list" aria-label="Restaurant highlights">
+      <div class="hstat" role="listitem">
+        <div class="hstat-n" aria-label="4.7 out of 5 stars">4.7★</div>
         <div class="hstat-l">Google Rating</div>
       </div>
-      <div class="hstat">
+      <div class="hstat" role="listitem">
         <div class="hstat-n">15+</div>
         <div class="hstat-l">Years of Service</div>
       </div>
-      <div class="hstat">
+      <div class="hstat" role="listitem">
         <div class="hstat-n">80+</div>
         <div class="hstat-l">Dishes on Menu</div>
       </div>
@@ -649,9 +712,9 @@ a { text-decoration: none; }
       <div class="hero-landscape">
         <img src="assets/feast-spread.png" alt="Indian feast — curries, basmati rice, and garlic naan at India Garden Pleasanton" loading="eager">
       </div>
-      <div class="hero-badge">
-        <div class="badge-num">4.7</div>
-        <div class="badge-txt">Google Stars</div>
+      <div class="hero-badge" aria-label="4.7 Google star rating">
+        <div class="badge-num" aria-hidden="true">4.7</div>
+        <div class="badge-txt" aria-hidden="true">Google Stars</div>
       </div>
     </div>
   </div>
@@ -694,22 +757,22 @@ a { text-decoration: none; }
       <img src="assets/garlic-naan.png" alt="Fresh garlic naan from the tandoor" loading="lazy">
     </div>
     <div class="about-pill">
-      <span class="about-pill-star">★★★★★</span>
+      <span class="about-pill-star" aria-hidden="true">★★★★★</span>
       Loved by Pleasanton since 2010
     </div>
   </div>
   <div>
-    <div class="sec-chip" style="color:var(--saffron)"><span style="background:var(--saffron)"></span>Our Story</div>
+    <div class="sec-chip" style="color:var(--saffron)"><span style="background:var(--saffron)" aria-hidden="true"></span>Our Story</div>
     <h2 class="sec-h">Where Every Dish<br>Tells a <em>Story</em></h2>
     <p class="sec-p">At India Garden, 210 Rose Ave, Pleasanton — we cook the way it was always meant to be: with patience, fresh spices, and love passed down through generations. From slow-simmered curries to crisp tandoori, every plate honors the culinary soul of North India.</p>
     <p class="sec-p" style="margin-top:0.8rem">Whether you're joining us for a casual lunch, a family celebration, or a grand catered event — you'll always leave with a full heart and a happy stomach.</p>
-    <div class="feat-grid">
-      <div class="feat"><div class="feat-icon" style="background:#FFF3E6">🔥</div>Traditional Tandoor Oven</div>
-      <div class="feat"><div class="feat-icon" style="background:#E6F7F4">🌿</div>Fresh Daily Sourced</div>
-      <div class="feat"><div class="feat-icon" style="background:#EDE7F6">🥗</div>Vegetarian Friendly</div>
-      <div class="feat"><div class="feat-icon" style="background:#FFF0F5">🎉</div>Private Event Hosting</div>
-      <div class="feat"><div class="feat-icon" style="background:#FFFBE8">👨‍👩‍👧</div>Family Atmosphere</div>
-      <div class="feat"><div class="feat-icon" style="background:#FFF3E6">🚚</div>Delivery & Takeout</div>
+    <div class="feat-grid" role="list" aria-label="Restaurant features">
+      <div class="feat" role="listitem"><span class="feat-icon" style="background:#FFF3E6" aria-hidden="true">🔥</span>Traditional Tandoor Oven</div>
+      <div class="feat" role="listitem"><span class="feat-icon" style="background:#E6F7F4" aria-hidden="true">🌿</span>Fresh Daily Sourced</div>
+      <div class="feat" role="listitem"><span class="feat-icon" style="background:#EDE7F6" aria-hidden="true">🥗</span>Vegetarian Friendly</div>
+      <div class="feat" role="listitem"><span class="feat-icon" style="background:#FFF0F5" aria-hidden="true">🎉</span>Private Event Hosting</div>
+      <div class="feat" role="listitem"><span class="feat-icon" style="background:#FFFBE8" aria-hidden="true">👨‍👩‍👧</span>Family Atmosphere</div>
+      <div class="feat" role="listitem"><span class="feat-icon" style="background:#FFF3E6" aria-hidden="true">🚚</span>Delivery &amp; Takeout</div>
     </div>
   </div>
 </section>
@@ -719,21 +782,22 @@ a { text-decoration: none; }
   <div class="sec-chip" style="color:var(--rose)"><span style="background:var(--rose)"></span>Signature Dishes</div>
   <h2 class="sec-h">Our Most <em>Loved</em> Picks</h2>
   <p class="sec-p">Every dish is prepared fresh with authentic recipes and hand-selected spices. Filter by category or browse them all.</p>
-  <div class="menu-tabs" role="tablist">
-    <button class="mtab on" onclick="filterMenu(this,'all')" role="tab" aria-selected="true">All Dishes</button>
-    <button class="mtab" onclick="filterMenu(this,'nonveg')" role="tab" aria-selected="false">Non-Veg</button>
-    <button class="mtab" onclick="filterMenu(this,'veg')" role="tab" aria-selected="false">Vegetarian</button>
-    <button class="mtab" onclick="filterMenu(this,'bread')" role="tab" aria-selected="false">Breads & Sides</button>
-    <button class="mtab" onclick="filterMenu(this,'dessert')" role="tab" aria-selected="false">Desserts</button>
+  <div class="menu-tabs" role="tablist" aria-label="Filter menu by category">
+    <button class="mtab on" id="tab-all" onclick="filterMenu(this,'all')" role="tab" aria-selected="true" aria-controls="menuGrid">All Dishes</button>
+    <button class="mtab" id="tab-nonveg" onclick="filterMenu(this,'nonveg')" role="tab" aria-selected="false" aria-controls="menuGrid">Non-Veg</button>
+    <button class="mtab" id="tab-veg" onclick="filterMenu(this,'veg')" role="tab" aria-selected="false" aria-controls="menuGrid">Vegetarian</button>
+    <button class="mtab" id="tab-bread" onclick="filterMenu(this,'bread')" role="tab" aria-selected="false" aria-controls="menuGrid">Breads &amp; Sides</button>
+    <button class="mtab" id="tab-dessert" onclick="filterMenu(this,'dessert')" role="tab" aria-selected="false" aria-controls="menuGrid">Desserts</button>
   </div>
-  <div class="menu-grid" id="menuGrid">
+  <p id="menuStatus" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+  <div class="menu-grid" id="menuGrid" role="tabpanel" aria-label="Menu items">
     <div class="mcard" data-cat="nonveg">
       <img src="assets/butter-chicken.png" class="mcard-img" alt="Butter Chicken" loading="lazy">
       <div class="mcard-body">
         <span class="mcard-tag" style="background:#FFF3E6;color:#C96500">Non-Veg · Chef's Pick</span>
         <div class="mcard-name">Butter Chicken</div>
         <div class="mcard-desc">Tender chicken in a velvety tomato-cream sauce, slow-simmered with aromatic spices and a touch of butter.</div>
-        <div class="mcard-foot"><span class="mcard-price">$18.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price" aria-label="Price 18 dollars 99 cents">$18.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order Butter Chicken online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="nonveg">
@@ -742,7 +806,7 @@ a { text-decoration: none; }
         <span class="mcard-tag" style="background:#FFF0F5;color:#A62A55">Non-Veg · Tandoor</span>
         <div class="mcard-name">Tandoori Chicken</div>
         <div class="mcard-desc">Marinated overnight in yogurt and spices, roasted to perfection in our traditional clay oven.</div>
-        <div class="mcard-foot"><span class="mcard-price">$21.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price">$21.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="nonveg">
@@ -751,7 +815,7 @@ a { text-decoration: none; }
         <span class="mcard-tag" style="background:#EDE7F6;color:#4A2E96">Non-Veg · Dum Style</span>
         <div class="mcard-name">Chicken Biryani</div>
         <div class="mcard-desc">Fragrant basmati rice slow-cooked with succulent chicken, saffron, caramelised onions, and whole spices.</div>
-        <div class="mcard-foot"><span class="mcard-price">$19.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price">$19.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="veg">
@@ -760,7 +824,7 @@ a { text-decoration: none; }
         <span class="mcard-tag" style="background:#E6F7F4;color:#0A6355">Vegetarian · Fan Fave</span>
         <div class="mcard-name">Paneer Tikka Masala</div>
         <div class="mcard-desc">Grilled cottage cheese cubes in a rich, smoky tomato-onion masala. A vegetarian classic.</div>
-        <div class="mcard-foot"><span class="mcard-price">$16.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price">$16.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="bread">
@@ -769,7 +833,7 @@ a { text-decoration: none; }
         <span class="mcard-tag" style="background:#FFFBE8;color:#7A5A00">Bread · Tandoor</span>
         <div class="mcard-name">Garlic Naan</div>
         <div class="mcard-desc">Pillowy, charred flatbread brushed with garlic butter, baked fresh from the clay tandoor.</div>
-        <div class="mcard-foot"><span class="mcard-price">$3.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price">$3.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="veg">
@@ -778,7 +842,7 @@ a { text-decoration: none; }
         <span class="mcard-tag" style="background:#FFF0F5;color:#A62A55">Vegetarian · Starter</span>
         <div class="mcard-name">Vegetable Samosa</div>
         <div class="mcard-desc">Crispy golden pastry filled with spiced potatoes and peas, served with tangy mint chutney.</div>
-        <div class="mcard-foot"><span class="mcard-price">$7.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price">$7.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="dessert">
@@ -787,7 +851,7 @@ a { text-decoration: none; }
         <span class="mcard-tag" style="background:#FFF3E6;color:#C96500">Dessert · Classic</span>
         <div class="mcard-name">Gulab Jamun</div>
         <div class="mcard-desc">Soft milk-solid dumplings soaked in rose-scented sugar syrup. A perfect sweet finish.</div>
-        <div class="mcard-foot"><span class="mcard-price">$6.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price">$6.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="nonveg">
@@ -796,7 +860,7 @@ a { text-decoration: none; }
         <span class="mcard-tag" style="background:#EDE7F6;color:#4A2E96">Non-Veg · Starter</span>
         <div class="mcard-name">Chicken Pakora</div>
         <div class="mcard-desc">Crispy fried chicken fritters marinated in spiced chickpea batter. A crowd favourite starter.</div>
-        <div class="mcard-foot"><span class="mcard-price">$13.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price">$13.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="veg">
@@ -805,12 +869,12 @@ a { text-decoration: none; }
         <span class="mcard-tag" style="background:#E6F7F4;color:#0A6355">Vegetarian · Curry</span>
         <div class="mcard-name">Mixed Vegetable Curry</div>
         <div class="mcard-desc">Seasonal vegetables slow-cooked in a fragrant North Indian masala. Comforting and wholesome.</div>
-        <div class="mcard-foot"><span class="mcard-price">$14.99</span><button class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')">Order →</button></div>
+        <div class="mcard-foot"><span class="mcard-price">$14.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
   </div>
   <div class="menu-view-all">
-    <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="btn-fill">View Full Menu & Order Online →</a>
+    <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="btn-fill">View Full Menu &amp; Order Online<span aria-hidden="true"> →</span><span class="sr-only"> (opens in new tab)</span></a>
   </div>
 </section>
 
@@ -820,24 +884,24 @@ a { text-decoration: none; }
   <h2 class="sec-h">Dining, Catering<br>& <em>More</em></h2>
   <p class="sec-p">Whether you're ordering for one or planning for five hundred — India Garden has you covered end to end.</p>
   <div class="svc-grid">
-    <div class="svc-card orange">
-      <div class="svc-icon-wrap">🛵</div>
-      <div class="svc-name">Online Ordering</div>
-      <div class="svc-desc">Get your favourites delivered fresh to your door or ready for pickup. Fast, reliable, and always made to order — powered by our online ordering system.</div>
-      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" class="svc-link">Order Now →</a>
-    </div>
-    <div class="svc-card rose">
-      <div class="svc-icon-wrap">🍽️</div>
-      <div class="svc-name">Catering</div>
-      <div class="svc-desc">From intimate family dinners to grand weddings and corporate events — our catering team brings authentic Indian flavours to your occasion with custom menus.</div>
-      <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" class="svc-link">Inquire About Catering →</a>
-    </div>
-    <div class="svc-card teal">
-      <div class="svc-icon-wrap">📅</div>
-      <div class="svc-name">Table Reservations</div>
-      <div class="svc-desc">Reserve your table in advance and walk in to a warm welcome. Perfect for date nights, family dinners, birthday celebrations, or business lunches.</div>
-      <a href="#booking" class="svc-link">Book a Table →</a>
-    </div>
+    <article class="svc-card orange">
+      <div class="svc-icon-wrap" aria-hidden="true">🛵</div>
+      <h3 class="svc-name">Online Ordering</h3>
+      <p class="svc-desc">Get your favourites delivered fresh to your door or ready for pickup. Fast, reliable, and always made to order — powered by our online ordering system.</p>
+      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="svc-link">Order Now<span aria-hidden="true"> →</span><span class="sr-only"> (opens in new tab)</span></a>
+    </article>
+    <article class="svc-card rose">
+      <div class="svc-icon-wrap" aria-hidden="true">🍽️</div>
+      <h3 class="svc-name">Catering</h3>
+      <p class="svc-desc">From intimate family dinners to grand weddings and corporate events — our catering team brings authentic Indian flavours to your occasion with custom menus.</p>
+      <a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="svc-link">Inquire About Catering<span aria-hidden="true"> →</span><span class="sr-only"> (opens in new tab)</span></a>
+    </article>
+    <article class="svc-card teal">
+      <div class="svc-icon-wrap" aria-hidden="true">📅</div>
+      <h3 class="svc-name">Table Reservations</h3>
+      <p class="svc-desc">Reserve your table in advance and walk in to a warm welcome. Perfect for date nights, family dinners, birthday celebrations, or business lunches.</p>
+      <a href="#booking" class="svc-link">Book a Table<span aria-hidden="true"> →</span></a>
+    </article>
   </div>
 </section>
 
@@ -850,28 +914,28 @@ a { text-decoration: none; }
       <p class="sec-p">Reserve a table, inquire about catering, or just say hello. We respond to every request promptly — usually within a few hours.</p>
       <div class="binfo">
         <div class="binfo-row">
-          <div class="binfo-icon">📍</div>
+          <div class="binfo-icon" aria-hidden="true">📍</div>
           <div>
             <div class="binfo-label">Address</div>
             <div class="binfo-val">210 Rose Ave, Pleasanton, CA 94566</div>
           </div>
         </div>
         <div class="binfo-row">
-          <div class="binfo-icon">📞</div>
+          <div class="binfo-icon" aria-hidden="true">📞</div>
           <div>
             <div class="binfo-label">Phone</div>
             <div class="binfo-val"><a href="tel:9254854800">(925) 485-4800</a></div>
           </div>
         </div>
         <div class="binfo-row">
-          <div class="binfo-icon">✉️</div>
+          <div class="binfo-icon" aria-hidden="true">✉️</div>
           <div>
             <div class="binfo-label">Email</div>
             <div class="binfo-val"><a href="mailto:info@indiagardenpleasanton.com">info@indiagardenpleasanton.com</a></div>
           </div>
         </div>
         <div class="binfo-row">
-          <div class="binfo-icon">🕐</div>
+          <div class="binfo-icon" aria-hidden="true">🕐</div>
           <div>
             <div class="binfo-label">Hours</div>
             <div class="binfo-val">
@@ -881,7 +945,7 @@ a { text-decoration: none; }
           </div>
         </div>
         <div class="binfo-row">
-          <div class="binfo-icon">🚗</div>
+          <div class="binfo-icon" aria-hidden="true">🚗</div>
           <div>
             <div class="binfo-label">Parking</div>
             <div class="binfo-val">Free parking available on-site</div>
@@ -890,28 +954,26 @@ a { text-decoration: none; }
       </div>
     </div>
     <div class="bform">
-      <div id="confirmBanner" class="confirm-banner">
-        ✅ Request received! We'll confirm your booking shortly. You can also call us at (925) 485-4800 for instant confirmation.
-      </div>
-      <div class="ftabs">
-        <button class="ftab on" onclick="switchBTab(this,'rf')">Reserve Table</button>
-        <button class="ftab" onclick="switchBTab(this,'cf')">Catering</button>
-        <button class="ftab" onclick="switchBTab(this,'mf')">Message Us</button>
+      <div id="confirmBanner" class="confirm-banner" role="status" aria-live="polite" aria-atomic="true"></div>
+      <div class="ftabs" role="tablist" aria-label="Contact form type">
+        <button type="button" class="ftab on" id="btab-rf" onclick="switchBTab(this,'rf')" role="tab" aria-selected="true" aria-controls="rf">Reserve Table</button>
+        <button type="button" class="ftab" id="btab-cf" onclick="switchBTab(this,'cf')" role="tab" aria-selected="false" aria-controls="cf">Catering</button>
+        <button type="button" class="ftab" id="btab-mf" onclick="switchBTab(this,'mf')" role="tab" aria-selected="false" aria-controls="mf">Message Us</button>
       </div>
 
       <!-- Reserve Table -->
-      <div id="rf">
+      <div id="rf" role="tabpanel" aria-labelledby="btab-rf">
         <div class="frow">
-          <div class="fg"><label for="r-fname">First Name</label><input type="text" id="r-fname" placeholder="Priya" autocomplete="given-name"></div>
-          <div class="fg"><label for="r-lname">Last Name</label><input type="text" id="r-lname" placeholder="Sharma" autocomplete="family-name"></div>
+          <div class="fg"><label for="r-fname">First Name<span class="req" aria-hidden="true">*</span></label><input type="text" id="r-fname" name="first-name" placeholder="Priya" autocomplete="given-name" required aria-required="true"></div>
+          <div class="fg"><label for="r-lname">Last Name<span class="req" aria-hidden="true">*</span></label><input type="text" id="r-lname" name="last-name" placeholder="Sharma" autocomplete="family-name" required aria-required="true"></div>
         </div>
         <div class="frow">
-          <div class="fg"><label for="r-phone">Phone</label><input type="tel" id="r-phone" placeholder="(925) 000-0000" autocomplete="tel"></div>
-          <div class="fg"><label for="r-email">Email</label><input type="email" id="r-email" placeholder="you@email.com" autocomplete="email"></div>
+          <div class="fg"><label for="r-phone">Phone<span class="req" aria-hidden="true">*</span></label><input type="tel" id="r-phone" name="phone" placeholder="(925) 000-0000" autocomplete="tel" required aria-required="true"></div>
+          <div class="fg"><label for="r-email">Email<span class="req" aria-hidden="true">*</span></label><input type="email" id="r-email" name="email" placeholder="you@email.com" autocomplete="email" required aria-required="true"></div>
         </div>
         <div class="frow">
-          <div class="fg"><label for="r-date">Date</label><input type="date" id="r-date"></div>
-          <div class="fg"><label for="r-time">Time</label><input type="time" id="r-time" value="19:00"></div>
+          <div class="fg"><label for="r-date">Date<span class="req" aria-hidden="true">*</span></label><input type="date" id="r-date" name="date" required aria-required="true"></div>
+          <div class="fg"><label for="r-time">Time<span class="req" aria-hidden="true">*</span></label><input type="time" id="r-time" name="time" value="19:00" required aria-required="true"></div>
         </div>
         <div class="frow">
           <div class="fg"><label for="r-guests">Guests</label>
@@ -937,17 +999,17 @@ a { text-decoration: none; }
             </select>
           </div>
         </div>
-        <div class="fg"><label for="r-notes">Special Requests</label><textarea id="r-notes" rows="2" placeholder="Dietary needs, seating preferences, high chair..." style="resize:none"></textarea></div>
-        <button class="bsubmit" onclick="submitForm('reserve')">Confirm Reservation →</button>
+        <div class="fg"><label for="r-notes">Special Requests</label><textarea id="r-notes" name="notes" rows="2" placeholder="Dietary needs, seating preferences, high chair..." style="resize:none"></textarea></div>
+        <button type="button" class="bsubmit" onclick="submitForm('reserve')">Confirm Reservation<span aria-hidden="true"> →</span></button>
       </div>
 
       <!-- Catering -->
-      <div id="cf" style="display:none">
+      <div id="cf" role="tabpanel" aria-labelledby="btab-cf" hidden>
         <div class="frow">
-          <div class="fg"><label for="c-name">Your Name</label><input type="text" id="c-name" placeholder="Full name" autocomplete="name"></div>
-          <div class="fg"><label for="c-phone">Phone</label><input type="tel" id="c-phone" placeholder="(925) 000-0000" autocomplete="tel"></div>
+          <div class="fg"><label for="c-name">Your Name<span class="req" aria-hidden="true">*</span></label><input type="text" id="c-name" name="name" placeholder="Full name" autocomplete="name" required aria-required="true"></div>
+          <div class="fg"><label for="c-phone">Phone<span class="req" aria-hidden="true">*</span></label><input type="tel" id="c-phone" name="phone" placeholder="(925) 000-0000" autocomplete="tel" required aria-required="true"></div>
         </div>
-        <div class="fg"><label for="c-email">Email</label><input type="email" id="c-email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="fg"><label for="c-email">Email<span class="req" aria-hidden="true">*</span></label><input type="email" id="c-email" name="email" placeholder="you@email.com" autocomplete="email" required aria-required="true"></div>
         <div class="frow">
           <div class="fg"><label for="c-date">Event Date</label><input type="date" id="c-date"></div>
           <div class="fg"><label for="c-count">Guest Count</label><input type="number" id="c-count" placeholder="50" min="10"></div>
@@ -963,14 +1025,14 @@ a { text-decoration: none; }
             <option>Other</option>
           </select>
         </div>
-        <div class="fg"><label for="c-details">Tell Us More</label><textarea id="c-details" rows="3" placeholder="Venue address, menu preferences, budget, dietary restrictions..." style="resize:none"></textarea></div>
-        <button class="bsubmit" onclick="submitForm('catering')">Send Catering Inquiry →</button>
+        <div class="fg"><label for="c-details">Tell Us More</label><textarea id="c-details" name="details" rows="3" placeholder="Venue address, menu preferences, budget, dietary restrictions..." style="resize:none"></textarea></div>
+        <button type="button" class="bsubmit" onclick="submitForm('catering')">Send Catering Inquiry<span aria-hidden="true"> →</span></button>
       </div>
 
       <!-- Message Us -->
-      <div id="mf" style="display:none">
-        <div class="fg"><label for="m-name">Your Name</label><input type="text" id="m-name" placeholder="Your name" autocomplete="name"></div>
-        <div class="fg"><label for="m-email">Email</label><input type="email" id="m-email" placeholder="you@email.com" autocomplete="email"></div>
+      <div id="mf" role="tabpanel" aria-labelledby="btab-mf" hidden>
+        <div class="fg"><label for="m-name">Your Name<span class="req" aria-hidden="true">*</span></label><input type="text" id="m-name" name="name" placeholder="Your name" autocomplete="name" required aria-required="true"></div>
+        <div class="fg"><label for="m-email">Email<span class="req" aria-hidden="true">*</span></label><input type="email" id="m-email" name="email" placeholder="you@email.com" autocomplete="email" required aria-required="true"></div>
         <div class="fg"><label for="m-subject">Subject</label>
           <select id="m-subject">
             <option>General Inquiry</option>
@@ -981,8 +1043,8 @@ a { text-decoration: none; }
             <option>Other</option>
           </select>
         </div>
-        <div class="fg"><label for="m-message">Message</label><textarea id="m-message" rows="4" placeholder="How can we help you today?" style="resize:none"></textarea></div>
-        <button class="bsubmit" onclick="submitForm('message')">Send Message →</button>
+        <div class="fg"><label for="m-message">Message<span class="req" aria-hidden="true">*</span></label><textarea id="m-message" name="message" rows="4" placeholder="How can we help you today?" style="resize:none" required aria-required="true"></textarea></div>
+        <button type="button" class="bsubmit" onclick="submitForm('message')">Send Message<span aria-hidden="true"> →</span></button>
       </div>
     </div>
   </div>
@@ -993,31 +1055,31 @@ a { text-decoration: none; }
   <div class="sec-chip" style="color:var(--purple)"><span style="background:var(--purple)"></span>Our Gallery</div>
   <h2 class="sec-h">A Feast for<br>the <em>Eyes</em></h2>
   <p class="sec-p">Every dish tells a story. Here's a glimpse into our kitchen's finest creations.</p>
-  <div class="gal-grid">
-    <div class="gitem w2">
+  <div class="gal-grid" role="list" aria-label="Photo gallery">
+    <figure class="gitem w2" role="listitem">
       <img src="assets/tandoori-sizzler.png" alt="Sizzling tandoori mixed grill with chicken tikka and shrimp" loading="lazy">
-      <div class="gtag">Tandoori Sizzler</div>
-    </div>
-    <div class="gitem">
+      <figcaption class="gtag">Tandoori Sizzler</figcaption>
+    </figure>
+    <figure class="gitem" role="listitem">
       <img src="assets/tandoori-chicken.png" alt="Tandoori chicken — charred and spiced to perfection" loading="lazy">
-      <div class="gtag">Tandoori Chicken</div>
-    </div>
-    <div class="gitem">
+      <figcaption class="gtag">Tandoori Chicken</figcaption>
+    </figure>
+    <figure class="gitem" role="listitem">
       <img src="assets/chicken-pakora.png" alt="Crispy chicken pakora with green chilies and curry leaves" loading="lazy">
-      <div class="gtag">Chicken Pakora</div>
-    </div>
-    <div class="gitem">
+      <figcaption class="gtag">Chicken Pakora</figcaption>
+    </figure>
+    <figure class="gitem" role="listitem">
       <img src="assets/mix-vegetable-curry.png" alt="Mixed vegetable curry with fresh seasonal produce" loading="lazy">
-      <div class="gtag">Veg Curry</div>
-    </div>
-    <div class="gitem w2">
+      <figcaption class="gtag">Veg Curry</figcaption>
+    </figure>
+    <figure class="gitem w2" role="listitem">
       <img src="assets/butter-chicken.png" alt="Butter chicken in rich tomato-cream sauce" loading="lazy">
-      <div class="gtag">Butter Chicken</div>
-    </div>
-    <div class="gitem">
+      <figcaption class="gtag">Butter Chicken</figcaption>
+    </figure>
+    <figure class="gitem" role="listitem">
       <img src="assets/garlic-naan.png" alt="Garlic naan with curry and raita" loading="lazy">
-      <div class="gtag">Garlic Naan</div>
-    </div>
+      <figcaption class="gtag">Garlic Naan</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -1027,24 +1089,24 @@ a { text-decoration: none; }
   <h2 class="sec-h">What Our Guests<br><em>Say</em></h2>
   <p class="sec-p">Hundreds of happy guests share their love for India Garden. Here are just a few of their stories.</p>
   <div class="rgrid">
-    <div class="rcard">
-      <div class="stars">★★★★★</div>
+    <blockquote class="rcard">
+      <div class="stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
       <p class="rtext">"This gem of Pleasanton always makes their food hit every time! You literally feel like you're coming into their home — warm, welcoming, and absolutely delicious."</p>
-      <div class="rname">— Joie C. · Google Review</div>
-    </div>
-    <div class="rcard">
-      <div class="stars">★★★★★</div>
+      <footer class="rname">— Joie C. · Google Review</footer>
+    </blockquote>
+    <blockquote class="rcard">
+      <div class="stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
       <p class="rtext">"Never disappointed with their service. The food quality is great and so is the ambiance. Staff is attentive, friendly, and our kids absolutely love this place for Indian food."</p>
-      <div class="rname">— Jo S. · Google Review</div>
-    </div>
-    <div class="rcard">
-      <div class="stars">★★★★★</div>
+      <footer class="rname">— Jo S. · Google Review</footer>
+    </blockquote>
+    <blockquote class="rcard">
+      <div class="stars" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
       <p class="rtext">"Probably the best Indian food in the valley. Chicken korma was incredible. The rice was generous, plump, moist and fresh — even for delivery. Thoroughly impressed."</p>
-      <div class="rname">— Zach G. · Google Review</div>
-    </div>
+      <footer class="rname">— Zach G. · Google Review</footer>
+    </blockquote>
   </div>
   <div class="reviews-cta">
-    <a href="https://www.google.com/search?q=India+Garden+Pleasanton+reviews" target="_blank" class="btn-stroke">Read All Reviews on Google →</a>
+    <a href="https://www.google.com/search?q=India+Garden+Pleasanton+reviews" target="_blank" rel="noopener noreferrer" class="btn-stroke">Read All Reviews on Google<span aria-hidden="true"> →</span><span class="sr-only"> (opens in new tab)</span></a>
   </div>
 </section>
 
@@ -1054,35 +1116,35 @@ a { text-decoration: none; }
   <h2 class="sec-h">Common <em>Questions</em></h2>
   <p class="sec-p">Quick answers to what our guests ask most.</p>
   <div class="faq-grid">
-    <div class="faq-item">
-      <div class="faq-q">What are you known for? <span class="faq-icon">🍛</span></div>
+    <details class="faq-item">
+      <summary>What are you known for?</summary>
       <div class="faq-a">We're best known for our Butter Chicken, Chicken Tikka Masala, Tandoori Chicken, Paneer Tikka Masala, Garlic Naan, Chicken Biryani, Lamb Curry, and Vegetable Samosa.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">What meals do you serve? <span class="faq-icon">🕐</span></div>
-      <div class="faq-a">We serve Lunch and Dinner. Lunch hours are 11am – 3pm and Dinner hours are 4:30pm – 9pm (9:30pm on Fri & Sat).</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Do you offer delivery or takeout? <span class="faq-icon">🚚</span></div>
-      <div class="faq-a">Yes! We offer both takeout and delivery. You can place your order online at our ordering portal or call us directly at (925) 485-4800.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Do you offer catering? <span class="faq-icon">🎉</span></div>
+    </details>
+    <details class="faq-item">
+      <summary>What meals do you serve?</summary>
+      <div class="faq-a">We serve Lunch and Dinner. Lunch hours are 11am – 3pm and Dinner hours are 4:30pm – 9pm (9:30pm on Fri &amp; Sat).</div>
+    </details>
+    <details class="faq-item">
+      <summary>Do you offer delivery or takeout?</summary>
+      <div class="faq-a">Yes! We offer both takeout and delivery. You can place your order online at our ordering portal or call us directly at <a href="tel:9254854800">(925) 485-4800</a>.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Do you offer catering?</summary>
       <div class="faq-a">Absolutely. We cater for weddings, corporate events, birthdays, religious ceremonies, and all special occasions. Use the inquiry form above or visit our catering portal.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Do you have vegetarian options? <span class="faq-icon">🥗</span></div>
+    </details>
+    <details class="faq-item">
+      <summary>Do you have vegetarian options?</summary>
       <div class="faq-a">Yes, we have a wide selection of vegetarian dishes including Paneer Tikka Masala, Palak Paneer, Dal Makhani, Vegetable Biryani, Samosa, and many more.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Where are you located? <span class="faq-icon">📍</span></div>
+    </details>
+    <details class="faq-item">
+      <summary>Where are you located?</summary>
       <div class="faq-a">We are located at 210 Rose Ave, Pleasanton, CA 94566. Free parking is available on-site. We're easy to find right in the heart of Pleasanton.</div>
-    </div>
+    </details>
   </div>
 </section>
 
 <!-- ===================== INFO STRIP ===================== -->
-<div class="info-strip" id="contact">
+<aside class="info-strip" id="contact" aria-label="Contact information">
   <div class="istrip-item">
     <div class="istrip-label">Address</div>
     <div class="istrip-val">210 Rose Ave<br>Pleasanton, CA 94566</div>
@@ -1101,22 +1163,24 @@ a { text-decoration: none; }
   <div class="istrip-item">
     <div class="istrip-label">Order & Social</div>
     <div class="istrip-val">
-      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank">Order Online →</a><br>
-      <a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank">@indiagardenpleasanton</a>
+      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer">Order Online<span aria-hidden="true"> →</span><span class="sr-only"> (opens in new tab)</span></a><br>
+      <a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank" rel="noopener noreferrer">@indiagardenpleasanton<span class="sr-only"> on Instagram (opens in new tab)</span></a>
     </div>
   </div>
-</div>
+</aside>
+
+</main>
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="assets/logo.png" alt="India Garden Pleasanton" class="logo-img footer-logo">
+      <img src="assets/logo.png" alt="" class="logo-img footer-logo" width="56" height="56">
       <p>Authentic North Indian cuisine made with heart. Dine-in, takeout, delivery, and catering — always crafted with tradition, love, and the freshest ingredients.</p>
       <div class="footer-social">
-        <a href="https://www.facebook.com/indiagardenn/" target="_blank" class="fsoc" aria-label="Facebook">FB</a>
-        <a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank" class="fsoc" aria-label="Instagram">IG</a>
-        <a href="https://www.google.com/search?q=India+Garden+Pleasanton" target="_blank" class="fsoc" aria-label="Google Reviews">G★</a>
+        <a href="https://www.facebook.com/indiagardenn/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="India Garden on Facebook (opens in new tab)">FB</a>
+        <a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="India Garden on Instagram (opens in new tab)">IG</a>
+        <a href="https://www.google.com/search?q=India+Garden+Pleasanton" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="India Garden Google Reviews (opens in new tab)">G★</a>
       </div>
     </div>
     <div class="footer-col">
@@ -1133,12 +1197,12 @@ a { text-decoration: none; }
     <div class="footer-col">
       <h5>Services</h5>
       <ul>
-        <li><a href="https://order.boons.io/site/indian-garden/300/y" target="_blank">Order Online</a></li>
-        <li><a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank">Catering</a></li>
+        <li><a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer">Order Online<span class="sr-only"> (opens in new tab)</span></a></li>
+        <li><a href="https://order.boons.io/site/catering/indian-garden/300/y" target="_blank" rel="noopener noreferrer">Catering<span class="sr-only"> (opens in new tab)</span></a></li>
         <li><a href="#booking">Table Reservation</a></li>
         <li><a href="#contact">Contact Us</a></li>
-        <li><a href="https://www.boons.io/terms-of-service" target="_blank">Terms of Service</a></li>
-        <li><a href="https://www.boons.io/privacy-policy" target="_blank">Privacy Policy</a></li>
+        <li><a href="https://www.boons.io/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service<span class="sr-only"> (opens in new tab)</span></a></li>
+        <li><a href="https://www.boons.io/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy<span class="sr-only"> (opens in new tab)</span></a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1146,10 +1210,10 @@ a { text-decoration: none; }
       <ul>
         <li><a href="tel:9254854800">(925) 485-4800</a></li>
         <li><a href="mailto:info@indiagardenpleasanton.com">Email Us</a></li>
-        <li><a href="https://maps.google.com/?q=210+Rose+Ave+Pleasanton+CA" target="_blank">Get Directions</a></li>
-        <li><a href="https://www.facebook.com/indiagardenn/" target="_blank">Facebook</a></li>
-        <li><a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank">Instagram</a></li>
-        <li><a href="https://www.google.com/search?q=India+Garden+Pleasanton" target="_blank">Google Reviews</a></li>
+        <li><a href="https://maps.google.com/?q=210+Rose+Ave+Pleasanton+CA" target="_blank" rel="noopener noreferrer">Get Directions<span class="sr-only"> (opens in new tab)</span></a></li>
+        <li><a href="https://www.facebook.com/indiagardenn/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (opens in new tab)</span></a></li>
+        <li><a href="https://www.instagram.com/indiagardenpleasanton/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in new tab)</span></a></li>
+        <li><a href="https://www.google.com/search?q=India+Garden+Pleasanton" target="_blank" rel="noopener noreferrer">Google Reviews<span class="sr-only"> (opens in new tab)</span></a></li>
       </ul>
     </div>
   </div>
@@ -1169,28 +1233,72 @@ a { text-decoration: none; }
   </div>
 </footer>
 
+<script src="accessibility.js"></script>
 <!-- ===================== JAVASCRIPT ===================== -->
 <script>
+/* Reduced motion preference */
+var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /* Nav scroll shadow */
 var nav = document.getElementById('mainNav');
 window.addEventListener('scroll', function() {
-  if (window.scrollY > 50) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+  updateCurrentNav();
 });
 
 /* Mobile menu toggle */
-function toggleMenu() {
-  var m = document.getElementById('mobileMenu');
-  m.classList.toggle('open');
+var navToggle = document.getElementById('navToggle');
+var mobileMenu = document.getElementById('mobileMenu');
+
+function toggleMenu(forceOpen) {
+  var isOpen = typeof forceOpen === 'boolean' ? forceOpen : !mobileMenu.classList.contains('open');
+  mobileMenu.classList.toggle('open', isOpen);
+  mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
 }
+
+navToggle.addEventListener('click', function() { toggleMenu(); });
+
 document.querySelectorAll('#mobileMenu a').forEach(function(a) {
-  a.addEventListener('click', function() {
-    document.getElementById('mobileMenu').classList.remove('open');
-  });
+  a.addEventListener('click', function() { toggleMenu(false); });
 });
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    if (mobileMenu.classList.contains('open')) toggleMenu(false);
+    if (window.IndiaGardenA11y) window.IndiaGardenA11y.closePanel();
+  }
+});
+
+/* Skip link focus */
+document.querySelector('.skip-link').addEventListener('click', function(e) {
+  var main = document.getElementById('main-content');
+  if (main) {
+    e.preventDefault();
+    main.focus();
+  }
+});
+
+/* Current page in navigation */
+function updateCurrentNav() {
+  var sections = ['home','about','menu','services','booking','gallery','reviews','faq','contact'];
+  var scrollPos = window.scrollY + 120;
+  var current = 'home';
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollPos) current = id;
+  });
+  document.querySelectorAll('.nav-links a[href^="#"], #mobileMenu a[href^="#"]').forEach(function(link) {
+    var href = link.getAttribute('href').slice(1);
+    if (href === current) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+updateCurrentNav();
 
 /* Menu filter */
 function filterMenu(btn, cat) {
@@ -1203,31 +1311,53 @@ function filterMenu(btn, cat) {
   var cards = document.querySelectorAll('.mcard');
   var visible = 0;
   cards.forEach(function(c) {
-    if (cat === 'all' || c.dataset.cat === cat) {
-      c.style.display = 'block';
-      visible++;
-    } else {
-      c.style.display = 'none';
-    }
+    var show = cat === 'all' || c.dataset.cat === cat;
+    c.style.display = show ? 'block' : 'none';
+    c.setAttribute('aria-hidden', show ? 'false' : 'true');
+    if (show) visible++;
   });
+  var status = document.getElementById('menuStatus');
+  if (status) {
+    status.textContent = visible + ' menu item' + (visible === 1 ? '' : 's') + ' shown for ' + btn.textContent.trim() + '.';
+  }
 }
+
+/* Menu tab keyboard navigation */
+document.querySelector('.menu-tabs').addEventListener('keydown', function(e) {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.mtab'));
+  var i = tabs.indexOf(document.activeElement);
+  if (i < 0) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
+});
 
 /* Booking form tab switch */
 function switchBTab(btn, id) {
-  document.querySelectorAll('.ftab').forEach(function(t) { t.classList.remove('on'); });
+  document.querySelectorAll('.ftab').forEach(function(t) {
+    t.classList.remove('on');
+    t.setAttribute('aria-selected', 'false');
+  });
   btn.classList.add('on');
-  var forms = ['rf', 'cf', 'mf'];
-  forms.forEach(function(f) {
-    document.getElementById(f).style.display = f === id ? 'block' : 'none';
+  btn.setAttribute('aria-selected', 'true');
+  ['rf', 'cf', 'mf'].forEach(function(f) {
+    var panel = document.getElementById(f);
+    var show = f === id;
+    panel.hidden = !show;
   });
   document.getElementById('confirmBanner').classList.remove('show');
 }
 
-/* Form submission simulation — replace with real backend/Formspree integration */
+/* Form submission simulation */
 function submitForm(type) {
   var banner = document.getElementById('confirmBanner');
+  var messages = {
+    reserve: 'Reservation request received. We will confirm your booking shortly. You can also call (925) 485-4800 for instant confirmation.',
+    catering: 'Catering inquiry received. We will respond shortly. You can also call (925) 485-4800.',
+    message: 'Message received. We will get back to you shortly. You can also call (925) 485-4800.'
+  };
+  banner.textContent = messages[type] || 'Request received.';
   banner.classList.add('show');
-  banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  banner.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
   setTimeout(function() { banner.classList.remove('show'); }, 7000);
 }
 
@@ -1239,10 +1369,14 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
       e.preventDefault();
       var offset = 80;
       var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: top, behavior: 'smooth' });
+      window.scrollTo({ top: top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      if (target.id === 'main-content') target.focus();
     }
   });
 });
+
+/* Initialize hidden menu cards state and form panels */
+filterMenu(document.querySelector('.mtab.on'), 'all');
 </script>
 </body>
 </html>
