@@ -61,7 +61,7 @@
   }
 
   function applySettings() {
-    /* Use px-based root size so all rem units scale reliably */
+    /* Use px-based root size so all rem units scale reliably. */
     var basePx = 16;
     root.style.fontSize = (basePx * state.textScale / 100) + 'px';
     root.classList.toggle('a11y-text-scaled', state.textScale !== 100);

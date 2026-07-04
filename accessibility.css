@@ -6,8 +6,8 @@
 /* ---------- Widget shell ---------- */
 .a11y-widget-root {
   position: fixed;
-  bottom: 1.25rem;
-  left: 1.25rem;
+  bottom: 20px;
+  left: 20px;
   z-index: 9999;
   font-family: Arial, Verdana, sans-serif;
   pointer-events: none;
@@ -33,13 +33,13 @@
 
 .a11y-widget-trigger:hover,
 .a11y-widget-trigger:focus-visible {
-  background: #E8820C;
+  background: #DF9E1D;
   outline: 3px solid #F5C842;
   outline-offset: 2px;
 }
 
 .a11y-widget-trigger .fa-wheelchair {
-  font-size: 1.5rem;
+  font-size: 24px;
   line-height: 1;
 }
 
@@ -49,7 +49,7 @@
   position: absolute;
   bottom: calc(100% + 12px);
   left: 0;
-  width: min(320px, calc(100vw - 2.5rem));
+  width: min(320px, calc(100vw - 40px));
   max-height: min(70vh, 520px);
   overflow-y: auto;
   background: #fff;
@@ -68,7 +68,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1rem 0.75rem;
+  padding: 16px 16px 12px;
   border-bottom: 1px solid #ede5d8;
   position: sticky;
   top: 0;
@@ -77,7 +77,7 @@
 }
 
 .a11y-widget-title {
-  font-size: 1.05rem;
+  font-size: 17px;
   font-weight: 700;
   color: #1a1208;
   margin: 0;
@@ -86,7 +86,7 @@
 .a11y-widget-close {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 24px;
   line-height: 1;
   cursor: pointer;
   color: #6b5e4e;
@@ -107,7 +107,7 @@
 .a11y-widget-list {
   list-style: none;
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 8px 0;
 }
 
 .a11y-widget-item {
@@ -119,11 +119,11 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
   color: #2d2215;
   text-align: left;
@@ -134,11 +134,11 @@
 .a11y-widget-action:focus-visible {
   background: #f5f0ea;
   outline: none;
-  box-shadow: inset 3px 0 0 #E8820C;
+  box-shadow: inset 3px 0 0 #DF9E1D;
 }
 
 .a11y-widget-action[aria-pressed="true"] {
-  background: #fff3e6;
+  background: #FBF2D9;
   font-weight: 600;
 }
 
@@ -150,14 +150,14 @@
 }
 
 .a11y-widget-action--reset {
-  color: #c9700a;
+  color: #C4881A;
   border-top: 1px solid #ede5d8;
-  margin-top: 0.25rem;
+  margin-top: 4px;
 }
 
 .a11y-widget-status {
-  padding: 0.5rem 1rem 0.75rem;
-  font-size: 0.75rem;
+  padding: 8px 16px 12px;
+  font-size: 12px;
   color: #6b5e4e;
   border-top: 1px solid #ede5d8;
 }
@@ -190,8 +190,8 @@ html.a11y-text-scaled body {
   left: 0;
   width: 100%;
   height: 4px;
-  background: #E8820C;
-  box-shadow: 0 0 0 1px #1a1208, 0 2px 8px rgba(232, 130, 12, 0.5);
+  background: #DF9E1D;
+  box-shadow: 0 0 0 1px #1a1208, 0 2px 8px rgba(223, 158, 29, 0.5);
   z-index: 9997;
   pointer-events: none;
   transform: translateY(-50%);
@@ -222,7 +222,7 @@ html.a11y-underline-links a {
 
 /* ---------- Feature: highlight links ---------- */
 html.a11y-highlight-links a {
-  background-color: #fff3e6 !important;
+  background-color: #FBF2D9 !important;
   color: #1a1208 !important;
   padding: 0 2px;
   border-radius: 2px;
@@ -239,7 +239,7 @@ html.a11y-highlight-headings h6 {
   background-color: #fffbe8 !important;
   color: #1a1208 !important;
   padding: 0.15em 0.35em;
-  border-left: 4px solid #E8820C;
+  border-left: 4px solid #DF9E1D;
   border-radius: 2px;
 }
 
@@ -395,8 +395,8 @@ html.a11y-enhanced-focus :focus-visible {
 /* ---------- Responsive ---------- */
 @media (max-width: 480px) {
   .a11y-widget-root {
-    bottom: 1rem;
-    left: 1rem;
+    bottom: 16px;
+    left: 16px;
   }
 
   .a11y-widget-trigger {
@@ -405,7 +405,7 @@ html.a11y-enhanced-focus :focus-visible {
   }
 
   .a11y-widget-panel {
-    width: calc(100vw - 2rem);
+    width: calc(100vw - 32px);
     max-height: 65vh;
   }
 }

@@ -22,10 +22,10 @@
 /* ===================== RESET & BASE ===================== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --saffron: #E8820C;
-  --saffron-hover: #C9700A;
-  --saffron-light: #FFF3E6;
-  --saffron-pale: #FFF9F2;
+  --saffron: #DF9E1D;
+  --saffron-hover: #C4881A;
+  --saffron-light: #FBF2D9;
+  --saffron-pale: #FEFBF2;
   --turmeric: #F5C842;
   --turmeric-light: #FFFBE8;
   --rose: #D63A6B;
@@ -96,7 +96,7 @@ a { text-decoration: none; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 72px;
+  height: 80px;
   position: sticky;
   top: 0;
   z-index: 200;
@@ -105,7 +105,7 @@ a { text-decoration: none; }
 .nav.scrolled { box-shadow: 0 4px 24px rgba(26,18,8,0.08); }
 .logo-wrap { display: flex; align-items: center; gap: 12px; }
 .logo-img {
-  height: 48px; width: auto;
+  height: 64px; width: auto;
   display: block; flex-shrink: 0;
   border-radius: 6px;
 }
@@ -114,7 +114,7 @@ a { text-decoration: none; }
 .nav-links { display: flex; gap: 0.2rem; align-items: center; }
 .nav-links a {
   padding: 0.45rem 1rem;
-  font-size: 0.82rem; color: var(--gray);
+  font-size: calc(0.82rem + 3px); color: var(--gray);
   border-radius: 8px; font-weight: 500;
   transition: all 0.2s;
 }
@@ -166,7 +166,7 @@ a { text-decoration: none; }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
   padding: 0.7rem 0.5rem;
-  font-size: 0.9rem; color: var(--gray);
+  font-size: calc(0.9rem + 3px); color: var(--gray);
   font-weight: 500; border-radius: 8px;
   border-bottom: 1px solid var(--border);
 }
@@ -205,7 +205,7 @@ a { text-decoration: none; }
 }
 .hero-pill {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--saffron-light); border: 1.5px solid #F5C49A;
+  background: var(--saffron-light); border: 1.5px solid #EAD08A;
   padding: 0.4rem 1rem; border-radius: 50px;
   font-size: 0.75rem; font-weight: 600; color: var(--saffron);
   margin-bottom: 1.5rem;
@@ -218,7 +218,7 @@ a { text-decoration: none; }
   margin-bottom: 1.2rem;
 }
 .hero h1 em { font-style: italic; color: var(--saffron); }
-.hero-sub { font-size: 1rem; color: var(--gray); line-height: 1.8; max-width: 420px; margin-bottom: 2rem; }
+.hero-sub { font-size: calc(1rem + 3px); color: var(--gray); line-height: 1.8; max-width: 420px; margin-bottom: 2rem; }
 .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
 .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
 .hstat-n { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--ink); line-height: 1; }
@@ -275,7 +275,7 @@ a { text-decoration: none; }
   margin-bottom: 1rem;
 }
 .sec-h em { font-style: italic; }
-.sec-p { font-size: 0.95rem; color: var(--gray); line-height: 1.85; max-width: 520px; }
+.sec-p { font-size: calc(0.95rem + 3px); color: var(--gray); line-height: 1.85; max-width: 520px; }
 
 /* ===================== ABOUT ===================== */
 .about { background: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
@@ -330,7 +330,7 @@ a { text-decoration: none; }
 .mcard:hover {
   transform: translateY(-5px);
   border-color: var(--saffron);
-  box-shadow: 0 16px 48px rgba(232,130,12,0.12);
+  box-shadow: 0 16px 48px rgba(223,158,29,0.18);
 }
 .mcard-img { width: 100%; height: 180px; object-fit: cover; transition: transform 0.5s; }
 .mcard:hover .mcard-img { transform: scale(1.04); }
@@ -341,7 +341,7 @@ a { text-decoration: none; }
   padding: 3px 9px; border-radius: 50px; margin-bottom: 0.5rem;
 }
 .mcard-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.35rem; }
-.mcard-desc { font-size: 0.78rem; color: var(--gray); line-height: 1.65; margin-bottom: 0.85rem; }
+.mcard-desc { font-size: calc(0.78rem + 3px); color: var(--gray); line-height: 1.65; margin-bottom: 0.85rem; }
 .mcard-foot { display: flex; justify-content: space-between; align-items: center; }
 .mcard-price { font-size: 1.05rem; font-weight: 700; color: var(--saffron); }
 .mcard-btn {
@@ -369,10 +369,10 @@ a { text-decoration: none; }
   font-size: 1.6rem; margin-bottom: 1.3rem;
 }
 .svc-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
-.svc-desc { font-size: 0.83rem; color: var(--gray); line-height: 1.8; margin-bottom: 1.4rem; }
+.svc-desc { font-size: calc(0.83rem + 3px); color: var(--gray); line-height: 1.8; margin-bottom: 1.4rem; }
 .svc-link { font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
-.svc-card.orange { background: #FFF6ED; border-color: #FAD5A0; }
-.svc-card.orange .svc-icon-wrap { background: #FFE8C5; }
+.svc-card.orange { background: #FEF7E0; border-color: #F0DB9A; }
+.svc-card.orange .svc-icon-wrap { background: #FBEEC0; }
 .svc-card.orange .svc-link { color: var(--saffron); }
 .svc-card.rose { background: var(--rose-light); border-color: #F7B8CC; }
 .svc-card.rose .svc-icon-wrap { background: #FFCFE0; }
@@ -474,9 +474,9 @@ a { text-decoration: none; }
   padding: 1.8rem; border: 1.5px solid var(--border);
   transition: all 0.25s;
 }
-.rcard:hover { border-color: var(--saffron); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(232,130,12,0.08); }
+.rcard:hover { border-color: var(--saffron); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(223,158,29,0.14); }
 .rtext {
-  font-family: 'Playfair Display', serif; font-size: 1rem;
+  font-family: 'Playfair Display', serif; font-size: calc(1rem + 3px);
   font-style: italic; color: var(--ink2); line-height: 1.75; margin-bottom: 1.2rem;
 }
 .rname { font-size: 0.75rem; font-weight: 700; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; }
@@ -514,7 +514,7 @@ a { text-decoration: none; }
   font-weight: 700; line-height: 1;
 }
 .faq-item[open] summary::after { content: '−'; }
-.faq-item .faq-a { padding: 0 1.6rem 1.5rem; font-size: 0.82rem; color: var(--gray); line-height: 1.75; }
+.faq-item .faq-a { padding: 0 1.6rem 1.5rem; font-size: calc(0.82rem + 3px); color: var(--gray); line-height: 1.75; }
 .faq-item .faq-a a { color: var(--teal); text-decoration: underline; font-weight: 600; }
 .gitem figcaption { margin: 0; }
 blockquote.rcard { margin: 0; }
@@ -523,10 +523,10 @@ blockquote.rcard { margin: 0; }
 /* ===================== FOOTER ===================== */
 .footer { background: var(--ink2); padding: 4.5rem 4rem 0; color: rgba(255,255,255,0.7); }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 2.5rem; }
-.footer-brand .footer-logo { height: 56px; margin-bottom: 0.75rem; }
+.footer-brand .footer-logo { height: 104px; margin-bottom: 0.75rem; }
 .footer-brand .logo-text { color: #fff; font-size: 1.2rem; display: block; margin-bottom: 0.2rem; }
 .footer-brand .logo-sub { color: rgba(255,255,255,0.4); }
-.footer-brand p { font-size: 0.82rem; line-height: 1.85; margin-top: 1rem; color: rgba(255,255,255,0.45); max-width: 230px; }
+.footer-brand p { font-size: calc(0.82rem + 3px); line-height: 1.85; margin-top: 1rem; color: rgba(255,255,255,0.45); max-width: 230px; }
 .footer-social { display: flex; gap: 8px; margin-top: 1.2rem; }
 .fsoc {
   width: 36px; height: 36px; border-radius: 8px;
@@ -650,7 +650,7 @@ blockquote.rcard { margin: 0; }
 <!-- ===================== NAVIGATION ===================== -->
 <header class="nav" id="mainNav" role="banner">
   <a href="#home" class="logo-wrap" aria-label="India Garden Pleasanton — Home">
-    <img src="assets/logo.png" alt="" class="logo-img" width="48" height="48">
+    <img src="assets/logo.png" alt="" class="logo-img" width="64" height="64">
   </a>
   <nav class="nav-links" aria-label="Primary navigation">
     <a href="#about">Our Story</a>
@@ -767,12 +767,12 @@ blockquote.rcard { margin: 0; }
     <p class="sec-p">At India Garden, 210 Rose Ave, Pleasanton — we cook the way it was always meant to be: with patience, fresh spices, and love passed down through generations. From slow-simmered curries to crisp tandoori, every plate honors the culinary soul of North India.</p>
     <p class="sec-p" style="margin-top:0.8rem">Whether you're joining us for a casual lunch, a family celebration, or a grand catered event — you'll always leave with a full heart and a happy stomach.</p>
     <div class="feat-grid" role="list" aria-label="Restaurant features">
-      <div class="feat" role="listitem"><span class="feat-icon" style="background:#FFF3E6" aria-hidden="true">🔥</span>Traditional Tandoor Oven</div>
+      <div class="feat" role="listitem"><span class="feat-icon" style="background:#FBF2D9" aria-hidden="true">🔥</span>Traditional Tandoor Oven</div>
       <div class="feat" role="listitem"><span class="feat-icon" style="background:#E6F7F4" aria-hidden="true">🌿</span>Fresh Daily Sourced</div>
       <div class="feat" role="listitem"><span class="feat-icon" style="background:#EDE7F6" aria-hidden="true">🥗</span>Vegetarian Friendly</div>
       <div class="feat" role="listitem"><span class="feat-icon" style="background:#FFF0F5" aria-hidden="true">🎉</span>Private Event Hosting</div>
       <div class="feat" role="listitem"><span class="feat-icon" style="background:#FFFBE8" aria-hidden="true">👨‍👩‍👧</span>Family Atmosphere</div>
-      <div class="feat" role="listitem"><span class="feat-icon" style="background:#FFF3E6" aria-hidden="true">🚚</span>Delivery &amp; Takeout</div>
+      <div class="feat" role="listitem"><span class="feat-icon" style="background:#FBF2D9" aria-hidden="true">🚚</span>Delivery &amp; Takeout</div>
     </div>
   </div>
 </section>
@@ -794,7 +794,7 @@ blockquote.rcard { margin: 0; }
     <div class="mcard" data-cat="nonveg">
       <img src="assets/butter-chicken.png" class="mcard-img" alt="Butter Chicken" loading="lazy">
       <div class="mcard-body">
-        <span class="mcard-tag" style="background:#FFF3E6;color:#C96500">Non-Veg · Chef's Pick</span>
+        <span class="mcard-tag" style="background:#FBF2D9;color:#7A5A00">Non-Veg · Chef's Pick</span>
         <div class="mcard-name">Butter Chicken</div>
         <div class="mcard-desc">Tender chicken in a velvety tomato-cream sauce, slow-simmered with aromatic spices and a touch of butter.</div>
         <div class="mcard-foot"><span class="mcard-price" aria-label="Price 18 dollars 99 cents">$18.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order Butter Chicken online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
@@ -848,7 +848,7 @@ blockquote.rcard { margin: 0; }
     <div class="mcard" data-cat="dessert">
       <img src="assets/gulab-jamun.png" class="mcard-img" alt="Gulab Jamun" loading="lazy">
       <div class="mcard-body">
-        <span class="mcard-tag" style="background:#FFF3E6;color:#C96500">Dessert · Classic</span>
+        <span class="mcard-tag" style="background:#FBF2D9;color:#7A5A00">Dessert · Classic</span>
         <div class="mcard-name">Gulab Jamun</div>
         <div class="mcard-desc">Soft milk-solid dumplings soaked in rose-scented sugar syrup. A perfect sweet finish.</div>
         <div class="mcard-foot"><span class="mcard-price">$6.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
@@ -1175,7 +1175,7 @@ blockquote.rcard { margin: 0; }
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <img src="assets/logo.png" alt="" class="logo-img footer-logo" width="56" height="56">
+      <img src="assets/logo.png" alt="" class="logo-img footer-logo" width="104" height="104">
       <p>Authentic North Indian cuisine made with heart. Dine-in, takeout, delivery, and catering — always crafted with tradition, love, and the freshest ingredients.</p>
       <div class="footer-social">
         <a href="https://www.facebook.com/indiagardenn/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="India Garden on Facebook (opens in new tab)">FB</a>
@@ -1203,6 +1203,7 @@ blockquote.rcard { margin: 0; }
         <li><a href="#contact">Contact Us</a></li>
         <li><a href="https://www.boons.io/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service<span class="sr-only"> (opens in new tab)</span></a></li>
         <li><a href="https://www.boons.io/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy<span class="sr-only"> (opens in new tab)</span></a></li>
+        <li><a href="https://www.boons.io/accessibility-statement" target="_blank" rel="noopener noreferrer">Accessibility Statement<span class="sr-only"> (opens in new tab)</span></a></li>
       </ul>
     </div>
     <div class="footer-col">
