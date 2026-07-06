@@ -784,6 +784,7 @@ blockquote.rcard { margin: 0; }
   <p class="sec-p">Every dish is prepared fresh with authentic recipes and hand-selected spices. Filter by category or browse them all.</p>
   <div class="menu-tabs" role="tablist" aria-label="Filter menu by category">
     <button class="mtab on" id="tab-all" onclick="filterMenu(this,'all')" role="tab" aria-selected="true" aria-controls="menuGrid">All Dishes</button>
+    <button class="mtab" id="tab-appetizer" onclick="filterMenu(this,'appetizer')" role="tab" aria-selected="false" aria-controls="menuGrid">Appetizer</button>
     <button class="mtab" id="tab-nonveg" onclick="filterMenu(this,'nonveg')" role="tab" aria-selected="false" aria-controls="menuGrid">Non-Veg</button>
     <button class="mtab" id="tab-veg" onclick="filterMenu(this,'veg')" role="tab" aria-selected="false" aria-controls="menuGrid">Vegetarian</button>
     <button class="mtab" id="tab-bread" onclick="filterMenu(this,'bread')" role="tab" aria-selected="false" aria-controls="menuGrid">Breads &amp; Sides</button>
@@ -836,13 +837,58 @@ blockquote.rcard { margin: 0; }
         <div class="mcard-foot"><span class="mcard-price">$3.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
-    <div class="mcard" data-cat="veg">
+    <div class="mcard" data-cat="appetizer">
       <img src="assets/vegetable-samosa.png" class="mcard-img" alt="Vegetable Samosa" loading="lazy">
       <div class="mcard-body">
-        <span class="mcard-tag" style="background:#FFF0F5;color:#A62A55">Vegetarian · Starter</span>
+        <span class="mcard-tag" style="background:#FFF0F5;color:#A62A55">Appetizer · Classic</span>
         <div class="mcard-name">Vegetable Samosa</div>
-        <div class="mcard-desc">Crispy golden pastry filled with spiced potatoes and peas, served with tangy mint chutney.</div>
-        <div class="mcard-foot"><span class="mcard-price">$7.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
+        <div class="mcard-desc">Crispy patties stuffed with mildly spiced potatoes — a timeless Indian starter.</div>
+        <div class="mcard-foot"><span class="mcard-price">$5.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order Vegetable Samosa online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="appetizer">
+      <img src="assets/feast-spread.png" class="mcard-img" alt="Pani Poori" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#E6F7F4;color:#0A6355">Appetizer · Street Food</span>
+        <div class="mcard-name">Pani Poori</div>
+        <div class="mcard-desc">Crisp hollow shells filled with spiced water, chutneys, and chickpeas — a beloved chaat favourite.</div>
+        <div class="mcard-foot"><span class="mcard-price">$8.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order Pani Poori online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="appetizer">
+      <img src="assets/curry-pan.png" class="mcard-img" alt="Dahi Bhalla" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#FBF2D9;color:#7A5A00">Appetizer · Chaat</span>
+        <div class="mcard-name">Dahi Bhalla</div>
+        <div class="mcard-desc">Lentil dumplings soaked in yogurt and topped with spices and chutneys.</div>
+        <div class="mcard-foot"><span class="mcard-price">$9.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order Dahi Bhalla online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="appetizer">
+      <img src="assets/vegetable-samosa.png" class="mcard-img" alt="Samosa Chaat" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#EDE7F6;color:#4A2E96">Appetizer · Fan Fave</span>
+        <div class="mcard-name">Samosa Chaat</div>
+        <div class="mcard-desc">Extremely flavorful street snack — crispy samosa served with chutney, garbanzo, and spices.</div>
+        <div class="mcard-foot"><span class="mcard-price">$12.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order Samosa Chaat online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="appetizer">
+      <img src="assets/garlic-naan.png" class="mcard-img" alt="Chole Bhature" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#FFFBE8;color:#7A5A00">Appetizer · North Indian</span>
+        <div class="mcard-name">Chole Bhature</div>
+        <div class="mcard-desc">Puffed fried bread served with garbanzo beans — a hearty and satisfying classic.</div>
+        <div class="mcard-foot"><span class="mcard-price">$14.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order Chole Bhature online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
+      </div>
+    </div>
+    <div class="mcard" data-cat="appetizer">
+      <img src="assets/chicken-pakora.png" class="mcard-img" alt="Chilli Chicken" loading="lazy">
+      <div class="mcard-body">
+        <span class="mcard-tag" style="background:#FFF0F5;color:#A62A55">Appetizer · Indo-Chinese</span>
+        <div class="mcard-name">Chilli Chicken</div>
+        <div class="mcard-desc">Lightly battered crispy chicken chunks tossed in a spicy chili sauce.</div>
+        <div class="mcard-foot"><span class="mcard-price">$13.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order Chilli Chicken online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="dessert">
@@ -852,15 +898,6 @@ blockquote.rcard { margin: 0; }
         <div class="mcard-name">Gulab Jamun</div>
         <div class="mcard-desc">Soft milk-solid dumplings soaked in rose-scented sugar syrup. A perfect sweet finish.</div>
         <div class="mcard-foot"><span class="mcard-price">$6.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
-      </div>
-    </div>
-    <div class="mcard" data-cat="nonveg">
-      <img src="assets/chicken-pakora.png" class="mcard-img" alt="Chicken Pakora" loading="lazy">
-      <div class="mcard-body">
-        <span class="mcard-tag" style="background:#EDE7F6;color:#4A2E96">Non-Veg · Starter</span>
-        <div class="mcard-name">Chicken Pakora</div>
-        <div class="mcard-desc">Crispy fried chicken fritters marinated in spiced chickpea batter. A crowd favourite starter.</div>
-        <div class="mcard-foot"><span class="mcard-price">$13.99</span><button type="button" class="mcard-btn" onclick="window.open('https://order.boons.io/site/indian-garden/300/y','_blank')" aria-label="Order this dish online (opens in new tab)">Order<span aria-hidden="true"> →</span></button></div>
       </div>
     </div>
     <div class="mcard" data-cat="veg">
