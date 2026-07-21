@@ -648,20 +648,30 @@ blockquote.rcard { margin: 0; }
   position: fixed;
   inset: 0;
   z-index: 10050;
-  background: rgba(0, 0, 0, 0.72);
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
   filter: none !important;
+  pointer-events: none;
 }
 .promo-overlay.show {
-  display: flex !important;
+  display: block;
+  pointer-events: auto;
+}
+.promo-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 10051;
 }
 .promo-modal {
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: min(380px, 92vw);
-  flex-shrink: 0;
-  z-index: 1;
+  z-index: 10052;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 .promo-card {
   background: #fff;
@@ -669,17 +679,12 @@ blockquote.rcard { margin: 0; }
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
   overflow: hidden;
 }
-.promo-flyer-link {
-  display: block;
-  width: 100%;
-  line-height: 0;
-  background: #fff;
-}
-.promo-flyer-link img {
+.promo-flyer-img {
   display: block;
   width: 100%;
   height: auto;
-  object-fit: contain;
+  max-width: 100%;
+  vertical-align: top;
 }
 .promo-footer {
   background: #fff;
@@ -729,11 +734,10 @@ body.promo-open {
 
 <!-- ===================== PROMO POPUP ===================== -->
 <div id="promoOverlay" class="promo-overlay" role="dialog" aria-modal="true" aria-labelledby="promoHeading" aria-hidden="true">
+  <div class="promo-backdrop" id="promoBackdrop" aria-hidden="true"></div>
   <div class="promo-modal" id="promoModal">
     <div class="promo-card">
-      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="promo-flyer-link">
-        <img src="assets/special-offer-flyer.png" alt="India Garden Special Offer — 15% discount on online orders. Use coupon code INDIA15." class="promo-flyer-img" width="380" height="520" loading="eager" decoding="async">
-      </a>
+      <img src="assets/july4-promo-flyer.png" alt="Happy 4th of July — Enjoy 10% off on all online orders with code FREEDOM10. Valid till July 5th, 2026." class="promo-flyer-img" width="380" height="520" loading="eager" decoding="async">
       <div class="promo-footer">
         <button type="button" class="promo-close" id="promoClose" aria-label="Close promotion">
           <span aria-hidden="true">&times;</span>
@@ -741,14 +745,15 @@ body.promo-open {
       </div>
     </div>
   </div>
-  <span id="promoHeading" class="sr-only">India Garden Special Offer — 15% discount with coupon code INDIA15</span>
+  <span id="promoHeading" class="sr-only">Happy 4th of July — 10% off with coupon code FREEDOM10</span>
 </div>
 <script>
 (function initPromoPopupEarly() {
   var overlay = document.getElementById('promoOverlay');
+  var backdrop = document.getElementById('promoBackdrop');
   var modal = document.getElementById('promoModal');
   var closeBtn = document.getElementById('promoClose');
-  if (!overlay || !modal || !closeBtn) return;
+  if (!overlay || !backdrop || !modal || !closeBtn) return;
 
   var promoDismissed = false;
 
@@ -772,13 +777,7 @@ body.promo-open {
     closePromoPopup();
   });
 
-  overlay.addEventListener('click', function(e) {
-    if (!modal.contains(e.target)) closePromoPopup();
-  });
-
-  modal.addEventListener('click', function(e) {
-    e.stopPropagation();
-  });
+  backdrop.addEventListener('click', closePromoPopup);
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && overlay.classList.contains('show')) closePromoPopup();
