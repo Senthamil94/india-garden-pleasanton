@@ -642,155 +642,107 @@ blockquote.rcard { margin: 0; }
   .hero-btns .btn-fill, .hero-btns .btn-stroke { text-align: center; }
 }
 
-/* ===================== PROMO POPUP ===================== */
-.promo-overlay {
+/* ===================== FLYER POPUP ===================== */
+#flyerOverlay.flyer-overlay-wrap {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 10050;
+  z-index: 99999;
   filter: none !important;
   pointer-events: none;
 }
-.promo-overlay.show {
+#flyerOverlay.flyer-overlay-wrap.is-open {
   display: block;
   pointer-events: auto;
 }
-.promo-backdrop {
+.flyer-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.72);
-  z-index: 10051;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1;
 }
-.promo-modal {
+.flyer-popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(380px, 92vw);
-  z-index: 10052;
-  display: block;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-.promo-card {
+  z-index: 2;
   background: #fff;
-  border: 3px solid #111;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  border-radius: 10px;
   overflow: hidden;
+  width: auto;
+  max-width: min(420px, 90vw);
+  max-height: 90vh;
+  animation: flyerPopup 0.3s ease;
+  filter: none !important;
 }
-.promo-flyer-img {
+.flyer-image {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
-  max-width: 100%;
-  vertical-align: top;
+  max-width: min(420px, 90vw);
+  max-height: 85vh;
+  object-fit: contain;
+  margin: 0 auto;
 }
-.promo-footer {
-  background: #fff;
-  border-top: 1px solid #e5e5e5;
-  padding: 0.5rem 0.85rem;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  min-height: 48px;
-}
-.promo-close {
-  width: 34px;
-  height: 34px;
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 35px;
+  height: 35px;
   border: none;
-  background: #d9d9d9;
-  color: #555;
-  cursor: pointer;
   border-radius: 50%;
-  z-index: 3;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
-  line-height: 1;
-  transition: background 0.2s, color 0.2s;
 }
-.promo-close:hover {
-  background: #c4c4c4;
-  color: #222;
+.close-btn:hover {
+  background: #ff0000;
 }
-.promo-close:focus-visible {
-  outline: 3px solid var(--focus-ring);
-  outline-offset: 2px;
+@keyframes flyerPopup {
+  from {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
 }
-body.promo-open {
-  overflow: hidden;
-}
-@media (max-width: 480px) {
-  .promo-modal { width: min(320px, 94vw); }
-  .promo-card { border-width: 2px; }
-  .promo-footer { min-height: 44px; padding: 0.4rem 0.65rem; }
-  .promo-close { width: 30px; height: 30px; font-size: 1.1rem; }
+@media (max-width: 768px) {
+  .flyer-popup {
+    max-width: min(340px, 92vw);
+  }
+  .flyer-image {
+    max-width: min(340px, 92vw);
+    max-height: 80vh;
+  }
 }
 </style>
 </head>
 <body>
 
-<!-- ===================== PROMO POPUP ===================== -->
-<div id="promoOverlay" class="promo-overlay" role="dialog" aria-modal="true" aria-labelledby="promoHeading" aria-hidden="true">
-  <div class="promo-backdrop" id="promoBackdrop" aria-hidden="true"></div>
-  <div class="promo-modal" id="promoModal">
-    <div class="promo-card">
-      <img src="assets/july4-promo-flyer.png" alt="Happy 4th of July — Enjoy 10% off on all online orders with code FREEDOM10. Valid till July 5th, 2026." class="promo-flyer-img" width="380" height="520" loading="eager" decoding="async">
-      <div class="promo-footer">
-        <button type="button" class="promo-close" id="promoClose" aria-label="Close promotion">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </div>
+<!-- Flyer Popup -->
+<div id="flyerOverlay" class="flyer-overlay-wrap" role="dialog" aria-modal="true" aria-labelledby="flyerTitle" aria-hidden="true">
+  <div class="flyer-backdrop" id="flyerBackdrop"></div>
+  <div class="flyer-popup">
+    <button type="button" class="close-btn" onclick="closeFlyer()" aria-label="Close flyer">&times;</button>
+    <img src="assets/special-offer-flyer.png" alt="India Garden Special Offer — 15% discount with coupon code INDIA15." class="flyer-image">
   </div>
-  <span id="promoHeading" class="sr-only">Happy 4th of July — 10% off with coupon code FREEDOM10</span>
+  <span id="flyerTitle" class="sr-only">India Garden Special Offer — 15% off with coupon INDIA15</span>
 </div>
 <script>
-(function initPromoPopupEarly() {
-  var overlay = document.getElementById('promoOverlay');
-  var backdrop = document.getElementById('promoBackdrop');
-  var modal = document.getElementById('promoModal');
-  var closeBtn = document.getElementById('promoClose');
-  if (!overlay || !backdrop || !modal || !closeBtn) return;
-
-  var promoDismissed = false;
-
-  function closePromoPopup() {
-    promoDismissed = true;
-    overlay.classList.remove('show');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('promo-open');
-  }
-
-  function openPromoPopup() {
-    if (promoDismissed) return;
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('promo-open');
-    overlay.classList.add('show');
-  }
-
-  closeBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    closePromoPopup();
-  });
-
-  backdrop.addEventListener('click', closePromoPopup);
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && overlay.classList.contains('show')) closePromoPopup();
-  });
-
-  function scheduleOpen() {
-    setTimeout(openPromoPopup, 400);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', scheduleOpen);
-  } else {
-    scheduleOpen();
+(function() {
+  var overlay = document.getElementById('flyerOverlay');
+  if (overlay && overlay.parentNode !== document.documentElement) {
+    document.documentElement.appendChild(overlay);
   }
 })();
 </script>
@@ -1573,6 +1525,37 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
 /* Initialize hidden menu cards state and form panels */
 var activeMenuTab = document.querySelector('.mtab.on');
 if (activeMenuTab) filterMenu(activeMenuTab, 'all');
+
+/* Flyer popup */
+function closeFlyer() {
+  var overlay = document.getElementById('flyerOverlay');
+  if (!overlay) return;
+  overlay.classList.remove('is-open');
+  overlay.setAttribute('aria-hidden', 'true');
+}
+
+window.addEventListener('load', function() {
+  var overlay = document.getElementById('flyerOverlay');
+  var backdrop = document.getElementById('flyerBackdrop');
+  if (!overlay) return;
+
+  if (overlay.parentNode !== document.documentElement) {
+    document.documentElement.appendChild(overlay);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeFlyer);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeFlyer();
+  });
+
+  setTimeout(function() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+  }, 1000);
+});
 </script>
 </body>
 </html>
