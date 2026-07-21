@@ -641,9 +641,99 @@ blockquote.rcard { margin: 0; }
   .hero-btns { flex-direction: column; }
   .hero-btns .btn-fill, .hero-btns .btn-stroke { text-align: center; }
 }
+
+/* ===================== PROMO POPUP ===================== */
+.promo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  background: rgba(26, 18, 8, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.promo-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.promo-modal {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  transform: scale(0.94) translateY(16px);
+  transition: transform 0.35s ease;
+}
+.promo-overlay.show .promo-modal {
+  transform: scale(1) translateY(0);
+}
+.promo-flyer-link {
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  line-height: 0;
+}
+.promo-flyer-link img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.promo-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  color: #802030;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+.promo-close:hover {
+  background: #fff;
+  color: #5a0018;
+}
+.promo-close:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+body.promo-open {
+  overflow: hidden;
+}
+@media (max-width: 480px) {
+  .promo-modal { max-width: 340px; }
+  .promo-close { width: 32px; height: 32px; top: 8px; right: 8px; font-size: 1.15rem; }
+}
 </style>
 </head>
 <body>
+
+<!-- ===================== PROMO POPUP ===================== -->
+<div id="promoOverlay" class="promo-overlay" role="dialog" aria-modal="true" aria-labelledby="promoHeading" aria-hidden="true">
+  <div class="promo-modal" id="promoModal">
+    <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="promo-flyer-link">
+      <img src="assets/special-offer-flyer.png" alt="India Garden Special Offer — 15% discount on online orders. Use coupon code INDIA15. Visit indiagardenpleasanton.com." width="420" height="560" loading="eager">
+    </a>
+    <button type="button" class="promo-close" id="promoClose" aria-label="Close promotion">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <span id="promoHeading" class="sr-only">India Garden Special Offer — 15% discount with coupon code INDIA15</span>
+</div>
 
 <a href="#main-content" class="skip-link">Skip to Main Content</a>
 
@@ -1415,6 +1505,59 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
 
 /* Initialize hidden menu cards state and form panels */
 filterMenu(document.querySelector('.mtab.on'), 'all');
+
+/* Promo popup — home page only */
+(function() {
+  var PROMO_STORAGE_KEY = 'promoDismissed_india15';
+  var overlay = document.getElementById('promoOverlay');
+  var closeBtn = document.getElementById('promoClose');
+  if (!overlay || !closeBtn) return;
+
+  function closePromoPopup() {
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('promo-open');
+    try { sessionStorage.setItem(PROMO_STORAGE_KEY, '1'); } catch (err) {}
+  }
+
+  function openPromoPopup() {
+    try {
+      if (sessionStorage.getItem(PROMO_STORAGE_KEY)) return;
+    } catch (err) {}
+
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('promo-open');
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        overlay.classList.add('show');
+      });
+    });
+  }
+
+  closeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    closePromoPopup();
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closePromoPopup();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('show')) closePromoPopup();
+  });
+
+  function schedulePromo() {
+    setTimeout(openPromoPopup, 800);
+  }
+
+  if (document.readyState === 'complete') {
+    schedulePromo();
+  } else {
+    window.addEventListener('load', schedulePromo);
+  }
+})();
 </script>
 </body>
 </html>
