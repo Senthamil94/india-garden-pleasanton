@@ -656,6 +656,7 @@ blockquote.rcard { margin: 0; }
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.35s ease, visibility 0.35s ease;
+  filter: none !important;
 }
 .promo-overlay.show {
   opacity: 1;
@@ -664,25 +665,25 @@ blockquote.rcard { margin: 0; }
 }
 .promo-modal {
   position: relative;
-  max-width: 420px;
-  width: 100%;
-  transform: scale(0.94) translateY(16px);
-  transition: transform 0.35s ease;
-}
-.promo-overlay.show .promo-modal {
-  transform: scale(1) translateY(0);
+  width: min(420px, 92vw);
+  flex-shrink: 0;
+  z-index: 1;
 }
 .promo-flyer-link {
   display: block;
-  border-radius: 4px;
+  width: 100%;
+  background: #fff url('assets/special-offer-flyer.png') center top / 100% auto no-repeat;
+  border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
   line-height: 0;
 }
 .promo-flyer-link img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
+  min-height: 280px;
+  object-fit: contain;
 }
 .promo-close {
   position: absolute;
@@ -695,7 +696,7 @@ blockquote.rcard { margin: 0; }
   color: #802030;
   cursor: pointer;
   border-radius: 50%;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -715,8 +716,9 @@ body.promo-open {
   overflow: hidden;
 }
 @media (max-width: 480px) {
-  .promo-modal { max-width: 340px; }
+  .promo-modal { width: min(340px, 92vw); }
   .promo-close { width: 32px; height: 32px; top: 8px; right: 8px; font-size: 1.15rem; }
+  .promo-flyer-link img { min-height: 220px; }
 }
 </style>
 </head>
@@ -726,7 +728,7 @@ body.promo-open {
 <div id="promoOverlay" class="promo-overlay" role="dialog" aria-modal="true" aria-labelledby="promoHeading" aria-hidden="true">
   <div class="promo-modal" id="promoModal">
     <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="promo-flyer-link">
-      <img src="assets/special-offer-flyer.png" alt="India Garden Special Offer — 15% discount on online orders. Use coupon code INDIA15. Visit indiagardenpleasanton.com." width="420" height="560" loading="eager">
+      <img src="assets/special-offer-flyer.png" alt="India Garden Special Offer — 15% discount on online orders. Use coupon code INDIA15. Visit indiagardenpleasanton.com." class="promo-flyer-img" width="420" height="560" loading="eager" decoding="async">
     </a>
     <button type="button" class="promo-close" id="promoClose" aria-label="Close promotion">
       <span aria-hidden="true">&times;</span>
@@ -1508,10 +1510,14 @@ filterMenu(document.querySelector('.mtab.on'), 'all');
 
 /* Promo popup — home page only */
 (function() {
-  var PROMO_STORAGE_KEY = 'promoDismissed_india15';
+  var PROMO_STORAGE_KEY = 'promoDismissed_india15_v2';
   var overlay = document.getElementById('promoOverlay');
+  var modal = document.getElementById('promoModal');
   var closeBtn = document.getElementById('promoClose');
-  if (!overlay || !closeBtn) return;
+  var flyerImg = document.querySelector('.promo-flyer-img');
+  if (!overlay || !modal || !closeBtn) return;
+
+  document.body.appendChild(overlay);
 
   function closePromoPopup() {
     overlay.classList.remove('show');
@@ -1527,10 +1533,15 @@ filterMenu(document.querySelector('.mtab.on'), 'all');
 
     overlay.setAttribute('aria-hidden', 'false');
     document.body.classList.add('promo-open');
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        overlay.classList.add('show');
-      });
+    overlay.classList.add('show');
+  }
+
+  if (flyerImg) {
+    flyerImg.addEventListener('error', function() {
+      var src = flyerImg.getAttribute('src') || '';
+      if (src.indexOf('/assets/') !== 0) {
+        flyerImg.src = '/assets/special-offer-flyer.png';
+      }
     });
   }
 
@@ -1541,7 +1552,7 @@ filterMenu(document.querySelector('.mtab.on'), 'all');
   });
 
   overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closePromoPopup();
+    if (!modal.contains(e.target)) closePromoPopup();
   });
 
   document.addEventListener('keydown', function(e) {
