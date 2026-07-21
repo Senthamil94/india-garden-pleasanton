@@ -655,7 +655,7 @@ blockquote.rcard { margin: 0; }
   filter: none !important;
 }
 .promo-overlay.show {
-  display: flex;
+  display: flex !important;
 }
 .promo-modal {
   position: relative;
@@ -730,6 +730,54 @@ body.promo-open {
   </div>
   <span id="promoHeading" class="sr-only">India Garden Special Offer — 15% discount with coupon code INDIA15</span>
 </div>
+<script>
+(function initPromoPopupEarly() {
+  var overlay = document.getElementById('promoOverlay');
+  var modal = document.getElementById('promoModal');
+  var closeBtn = document.getElementById('promoClose');
+  if (!overlay || !modal || !closeBtn) return;
+
+  var promoDismissed = false;
+
+  function closePromoPopup() {
+    promoDismissed = true;
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('promo-open');
+  }
+
+  function openPromoPopup() {
+    if (promoDismissed) return;
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('promo-open');
+    overlay.classList.add('show');
+  }
+
+  closeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    closePromoPopup();
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closePromoPopup();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('show')) closePromoPopup();
+  });
+
+  function scheduleOpen() {
+    setTimeout(openPromoPopup, 400);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleOpen);
+  } else {
+    scheduleOpen();
+  }
+})();
+</script>
 
 <a href="#main-content" class="skip-link">Skip to Main Content</a>
 
@@ -1382,7 +1430,9 @@ function toggleMenu(forceOpen) {
   navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
 }
 
-navToggle.addEventListener('click', function() { toggleMenu(); });
+if (navToggle) {
+  navToggle.addEventListener('click', function() { toggleMenu(); });
+}
 
 document.querySelectorAll('#mobileMenu a').forEach(function(a) {
   a.addEventListener('click', function() { toggleMenu(false); });
@@ -1395,14 +1445,16 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-/* Skip link focus */
-document.querySelector('.skip-link').addEventListener('click', function(e) {
-  var main = document.getElementById('main-content');
-  if (main) {
-    e.preventDefault();
-    main.focus();
-  }
-});
+var skipLink = document.querySelector('.skip-link');
+if (skipLink) {
+  skipLink.addEventListener('click', function(e) {
+    var main = document.getElementById('main-content');
+    if (main) {
+      e.preventDefault();
+      main.focus();
+    }
+  });
+}
 
 /* Current page in navigation */
 function updateCurrentNav() {
@@ -1505,46 +1557,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
 /* Initialize hidden menu cards state and form panels */
 var activeMenuTab = document.querySelector('.mtab.on');
 if (activeMenuTab) filterMenu(activeMenuTab, 'all');
-
-/* Promo popup — home page only */
-(function() {
-  var overlay = document.getElementById('promoOverlay');
-  var modal = document.getElementById('promoModal');
-  var closeBtn = document.getElementById('promoClose');
-  if (!overlay || !modal || !closeBtn) return;
-
-  var promoDismissed = false;
-
-  function closePromoPopup() {
-    promoDismissed = true;
-    overlay.classList.remove('show');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('promo-open');
-  }
-
-  function openPromoPopup() {
-    if (promoDismissed) return;
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('promo-open');
-    overlay.classList.add('show');
-  }
-
-  closeBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    closePromoPopup();
-  });
-
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closePromoPopup();
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && overlay.classList.contains('show')) closePromoPopup();
-  });
-
-  setTimeout(openPromoPopup, 600);
-})();
 </script>
 </body>
 </html>
