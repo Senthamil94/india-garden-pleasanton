@@ -644,24 +644,18 @@ blockquote.rcard { margin: 0; }
 
 /* ===================== PROMO POPUP ===================== */
 .promo-overlay {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 10050;
   background: rgba(26, 18, 8, 0.78);
-  display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.25rem;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.35s ease, visibility 0.35s ease;
   filter: none !important;
 }
 .promo-overlay.show {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+  display: flex;
 }
 .promo-modal {
   position: relative;
@@ -1453,13 +1447,16 @@ function filterMenu(btn, cat) {
 }
 
 /* Menu tab keyboard navigation */
-document.querySelector('.menu-tabs').addEventListener('keydown', function(e) {
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.mtab'));
-  var i = tabs.indexOf(document.activeElement);
-  if (i < 0) return;
-  if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
-});
+var menuTabs = document.querySelector('.menu-tabs');
+if (menuTabs) {
+  menuTabs.addEventListener('keydown', function(e) {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.mtab'));
+    var i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); tabs[(i + 1) % tabs.length].focus(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); tabs[(i - 1 + tabs.length) % tabs.length].focus(); }
+  });
+}
 
 /* Booking form tab switch */
 function switchBTab(btn, id) {
@@ -1506,43 +1503,30 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
 });
 
 /* Initialize hidden menu cards state and form panels */
-filterMenu(document.querySelector('.mtab.on'), 'all');
+var activeMenuTab = document.querySelector('.mtab.on');
+if (activeMenuTab) filterMenu(activeMenuTab, 'all');
 
 /* Promo popup — home page only */
 (function() {
-  var PROMO_STORAGE_KEY = 'promoDismissed_india15_v2';
   var overlay = document.getElementById('promoOverlay');
   var modal = document.getElementById('promoModal');
   var closeBtn = document.getElementById('promoClose');
-  var flyerImg = document.querySelector('.promo-flyer-img');
   if (!overlay || !modal || !closeBtn) return;
 
-  document.body.appendChild(overlay);
+  var promoDismissed = false;
 
   function closePromoPopup() {
+    promoDismissed = true;
     overlay.classList.remove('show');
     overlay.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('promo-open');
-    try { sessionStorage.setItem(PROMO_STORAGE_KEY, '1'); } catch (err) {}
   }
 
   function openPromoPopup() {
-    try {
-      if (sessionStorage.getItem(PROMO_STORAGE_KEY)) return;
-    } catch (err) {}
-
+    if (promoDismissed) return;
     overlay.setAttribute('aria-hidden', 'false');
     document.body.classList.add('promo-open');
     overlay.classList.add('show');
-  }
-
-  if (flyerImg) {
-    flyerImg.addEventListener('error', function() {
-      var src = flyerImg.getAttribute('src') || '';
-      if (src.indexOf('/assets/') !== 0) {
-        flyerImg.src = '/assets/special-offer-flyer.png';
-      }
-    });
   }
 
   closeBtn.addEventListener('click', function(e) {
@@ -1552,22 +1536,14 @@ filterMenu(document.querySelector('.mtab.on'), 'all');
   });
 
   overlay.addEventListener('click', function(e) {
-    if (!modal.contains(e.target)) closePromoPopup();
+    if (e.target === overlay) closePromoPopup();
   });
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && overlay.classList.contains('show')) closePromoPopup();
   });
 
-  function schedulePromo() {
-    setTimeout(openPromoPopup, 800);
-  }
-
-  if (document.readyState === 'complete') {
-    schedulePromo();
-  } else {
-    window.addEventListener('load', schedulePromo);
-  }
+  setTimeout(openPromoPopup, 600);
 })();
 </script>
 </body>
