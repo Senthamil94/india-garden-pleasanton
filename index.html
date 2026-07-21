@@ -648,10 +648,10 @@ blockquote.rcard { margin: 0; }
   position: fixed;
   inset: 0;
   z-index: 10050;
-  background: rgba(26, 18, 8, 0.78);
+  background: rgba(0, 0, 0, 0.72);
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
+  padding: 1.5rem;
   filter: none !important;
 }
 .promo-overlay.show {
@@ -659,48 +659,56 @@ blockquote.rcard { margin: 0; }
 }
 .promo-modal {
   position: relative;
-  width: min(420px, 92vw);
+  width: min(380px, 92vw);
   flex-shrink: 0;
   z-index: 1;
+}
+.promo-card {
+  background: #fff;
+  border: 3px solid #111;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
 }
 .promo-flyer-link {
   display: block;
   width: 100%;
-  background: #fff url('assets/special-offer-flyer.png') center top / 100% auto no-repeat;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
   line-height: 0;
+  background: #fff;
 }
 .promo-flyer-link img {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 280px;
   object-fit: contain;
 }
+.promo-footer {
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 48px;
+}
 .promo-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border: none;
-  background: rgba(255, 255, 255, 0.95);
-  color: #802030;
+  background: #d9d9d9;
+  color: #555;
   cursor: pointer;
   border-radius: 50%;
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   line-height: 1;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: background 0.2s, color 0.2s;
 }
 .promo-close:hover {
-  background: #fff;
-  color: #5a0018;
+  background: #c4c4c4;
+  color: #222;
 }
 .promo-close:focus-visible {
   outline: 3px solid var(--focus-ring);
@@ -710,9 +718,10 @@ body.promo-open {
   overflow: hidden;
 }
 @media (max-width: 480px) {
-  .promo-modal { width: min(340px, 92vw); }
-  .promo-close { width: 32px; height: 32px; top: 8px; right: 8px; font-size: 1.15rem; }
-  .promo-flyer-link img { min-height: 220px; }
+  .promo-modal { width: min(320px, 94vw); }
+  .promo-card { border-width: 2px; }
+  .promo-footer { min-height: 44px; padding: 0.4rem 0.65rem; }
+  .promo-close { width: 30px; height: 30px; font-size: 1.1rem; }
 }
 </style>
 </head>
@@ -721,12 +730,16 @@ body.promo-open {
 <!-- ===================== PROMO POPUP ===================== -->
 <div id="promoOverlay" class="promo-overlay" role="dialog" aria-modal="true" aria-labelledby="promoHeading" aria-hidden="true">
   <div class="promo-modal" id="promoModal">
-    <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="promo-flyer-link">
-      <img src="assets/special-offer-flyer.png" alt="India Garden Special Offer — 15% discount on online orders. Use coupon code INDIA15. Visit indiagardenpleasanton.com." class="promo-flyer-img" width="420" height="560" loading="eager" decoding="async">
-    </a>
-    <button type="button" class="promo-close" id="promoClose" aria-label="Close promotion">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <div class="promo-card">
+      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="promo-flyer-link">
+        <img src="assets/special-offer-flyer.png" alt="India Garden Special Offer — 15% discount on online orders. Use coupon code INDIA15." class="promo-flyer-img" width="380" height="520" loading="eager" decoding="async">
+      </a>
+      <div class="promo-footer">
+        <button type="button" class="promo-close" id="promoClose" aria-label="Close promotion">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
   </div>
   <span id="promoHeading" class="sr-only">India Garden Special Offer — 15% discount with coupon code INDIA15</span>
 </div>
@@ -760,7 +773,11 @@ body.promo-open {
   });
 
   overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closePromoPopup();
+    if (!modal.contains(e.target)) closePromoPopup();
+  });
+
+  modal.addEventListener('click', function(e) {
+    e.stopPropagation();
   });
 
   document.addEventListener('keydown', function(e) {
