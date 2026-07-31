@@ -53,10 +53,12 @@
   }
 
   function buildFilter() {
+    /* Return '' when all defaults — any non-none filter on body makes it the
+       containing block for position:fixed elements (breaks the promo popup). */
     var parts = [];
     if (state.grayscale) parts.push('grayscale(100%)');
-    parts.push('saturate(' + state.saturation + '%)');
-    parts.push('brightness(' + state.brightness + '%)');
+    if (state.saturation !== 100) parts.push('saturate(' + state.saturation + '%)');
+    if (state.brightness !== 100) parts.push('brightness(' + state.brightness + '%)');
     return parts.join(' ');
   }
 
