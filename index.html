@@ -749,6 +749,9 @@ body.promo-open {
 </div>
 <script>
 (function initPromoPopupEarly() {
+  var PROMO_ENABLED = false;
+  if (!PROMO_ENABLED) return;
+
   var overlay = document.getElementById('promoOverlay');
   var backdrop = document.getElementById('promoBackdrop');
   var modal = document.getElementById('promoModal');
