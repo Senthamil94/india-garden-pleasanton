@@ -737,7 +737,7 @@ body.promo-open {
   <div class="promo-backdrop" id="promoBackdrop" aria-hidden="true"></div>
   <div class="promo-modal" id="promoModal">
     <div class="promo-card">
-      <img src="assets/summer-weekend-flyer.png" alt="Summer Weekend Special — 20% off on all online orders with code SUMMER20. Valid till August 2, 2026. Order now." class="promo-flyer-img" width="380" height="472" loading="eager" decoding="async">
+      <img src="assets/summer-weekend-flyer.png" alt="Summer Weekend Special — Get 10% off all online orders with code TREAT10." class="promo-flyer-img" width="824" height="1024" loading="eager" decoding="async">
       <div class="promo-footer">
         <button type="button" class="promo-close" id="promoClose" aria-label="Close promotion">
           <span aria-hidden="true">&times;</span>
@@ -745,11 +745,11 @@ body.promo-open {
       </div>
     </div>
   </div>
-  <span id="promoHeading" class="sr-only">Summer Weekend Special — 20% off with coupon code SUMMER20</span>
+  <span id="promoHeading" class="sr-only">Summer Weekend Special — 10% off with coupon code TREAT10</span>
 </div>
 <script>
 (function initPromoPopupEarly() {
-  var PROMO_ENABLED = false;
+  var PROMO_ENABLED = true;
   if (!PROMO_ENABLED) return;
 
   var overlay = document.getElementById('promoOverlay');
