@@ -679,6 +679,10 @@ blockquote.rcard { margin: 0; }
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
   overflow: hidden;
 }
+.promo-flyer-link {
+  display: block;
+  line-height: 0;
+}
 .promo-flyer-img {
   display: block;
   width: 100%;
@@ -737,7 +741,10 @@ body.promo-open {
   <div class="promo-backdrop" id="promoBackdrop" aria-hidden="true"></div>
   <div class="promo-modal" id="promoModal">
     <div class="promo-card">
-      <img src="assets/summer-weekend-flyer.png" alt="Summer Weekend Special — Get 10% off all online orders with code TREAT10." class="promo-flyer-img" width="824" height="1024" loading="eager" decoding="async">
+      <a href="https://order.boons.io/site/indian-garden/300/y" target="_blank" rel="noopener noreferrer" class="promo-flyer-link">
+        <img src="assets/diwali-weekend-diwali10.jpg" alt="Diwali Weekend Special — 10% off online and pickup orders. Use code DIWALI10." class="promo-flyer-img" width="768" height="1024" loading="eager" decoding="async">
+        <span class="sr-only">Order online with code DIWALI10 (opens in new tab)</span>
+      </a>
       <div class="promo-footer">
         <button type="button" class="promo-close" id="promoClose" aria-label="Close promotion">
           <span aria-hidden="true">&times;</span>
@@ -745,11 +752,11 @@ body.promo-open {
       </div>
     </div>
   </div>
-  <span id="promoHeading" class="sr-only">Summer Weekend Special — 10% off with coupon code TREAT10</span>
+  <span id="promoHeading" class="sr-only">Diwali Weekend Special — 10% off online and pickup orders with coupon code DIWALI10</span>
 </div>
 <script>
 (function initPromoPopupEarly() {
-  var PROMO_ENABLED = false;
+  var PROMO_ENABLED = true;
   if (!PROMO_ENABLED) return;
 
   var overlay = document.getElementById('promoOverlay');
